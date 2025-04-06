@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:store_app/data/repository/auth_repository.dart';
 
-class LoginBloc extends ChangeNotifier{
-  LoginBloc({required AuthRepository repo}): _repo = repo{
+class LoginBloc extends ChangeNotifier {
+  LoginBloc({required AuthRepository repo}) : _repo = repo {
     login();
   }
 
+  final formKey = GlobalKey<FormState>();
   final AuthRepository _repo;
 
   String? _errorMessage;
@@ -17,10 +18,10 @@ class LoginBloc extends ChangeNotifier{
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future<bool> login()async{
-    try{
+  Future<bool> login() async {
+    try {
       await _repo.login(emailController.text, passwordController.text);
-    }on Exception catch (e){
+    } on Exception catch (e) {
       _errorMessage = e.toString();
       notifyListeners();
       return false;

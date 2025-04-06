@@ -7,7 +7,7 @@ import 'package:store_app/features/auth/pages/login_view.dart';
 import 'package:store_app/features/auth/pages/sign_up_view.dart';
 
 final router = GoRouter(
-  initialLocation: Routes.login,
+  initialLocation: Routes.signUp,
   routes: [
     GoRoute(
       path: Routes.login,

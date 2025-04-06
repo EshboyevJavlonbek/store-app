@@ -2,7 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:store_app/data/repository/auth_repository.dart';
 
 class SignUpBloc extends ChangeNotifier {
-  SignUpBloc({required AuthRepository repo}) : _repo = repo {}
+  SignUpBloc({required AuthRepository repo}) : _repo = repo;
+
+  final formKey = GlobalKey<FormState>();
   final AuthRepository _repo;
 
   final fullNameController = TextEditingController();
