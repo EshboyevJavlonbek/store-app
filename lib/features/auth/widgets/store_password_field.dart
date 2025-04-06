@@ -56,7 +56,7 @@ class _StorePasswordFieldState extends State<StorePasswordField> {
               fontWeight: FontWeight.w500,
             ),
             obscureText: _obscure,
-            obscuringCharacter: "●",
+            obscuringCharacter: "*",
             decoration: InputDecoration(
               suffixIcon: IconButton(
                 icon: SvgPicture.asset(
