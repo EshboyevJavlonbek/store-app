@@ -47,6 +47,7 @@ class TitleAndDescription extends StatelessWidget {
         Text(
           desc,
           overflow: TextOverflow.ellipsis,
+          maxLines: 2,
           style: TextStyle(
             color: descColor,
             fontSize: descFontSize.sp,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store_app/features/auth/manager/sign_up/sign_up_bloc.dart';
-import 'package:store_app/features/auth/pages/sign_up_view_form.dart';
+import 'package:store_app/features/auth/widgets/sign_up_view_form.dart';
 import 'package:store_app/features/auth/widgets/or_item.dart';
 import 'package:store_app/features/auth/widgets/store_app_button_with_logo.dart';
 import 'package:store_app/features/auth/widgets/title_and_description.dart';
