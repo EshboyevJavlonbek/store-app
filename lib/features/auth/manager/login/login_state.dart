@@ -1,33 +1,44 @@
-// import 'package:equatable/equatable.dart';
-//
-// enum LoginStatus { idle, loading, error }
-//
-// class LoginState extends Equatable {
-//   final String? errorMessage;
-//   final LoginStatus? status;
-//
-//   const LoginState({
-//     required this.errorMessage,
-//     required this.status,
-//   });
-//
-//   factory LoginState.initial() {
-//     return LoginState(
-//       errorMessage: null,
-//       status: LoginStatus.loading,
-//     );
-//   }
-//
-//   LoginState copyWidth({
-//     String? errorMessage,
-//     LoginStatus? status,
-//   }) {
-//     return LoginState(
-//       errorMessage: errorMessage ?? this.errorMessage,
-//       status: status ?? this.status,
-//     );
-//   }
-//
-//   @override
-//   List<Object?> get props => [errorMessage, status];
-// }
+import 'package:equatable/equatable.dart';
+
+enum LoginStatus { idle, loading, error, success }
+
+class LoginState extends Equatable {
+  final String? errorMessage;
+  final LoginStatus status;
+
+  const LoginState({
+    required this.errorMessage,
+    required this.status,
+  });
+
+  factory LoginState.initial() {
+    return const LoginState(
+      errorMessage: null,
+      status: LoginStatus.idle,
+    );
+  }
+
+  factory LoginState.loading() {
+    return const LoginState(
+      errorMessage: null,
+      status: LoginStatus.loading,
+    );
+  }
+
+  factory LoginState.success() {
+    return const LoginState(
+      errorMessage: null,
+      status: LoginStatus.success,
+    );
+  }
+
+  factory LoginState.error(String errorMessage) {
+    return LoginState(
+      errorMessage: errorMessage,
+      status: LoginStatus.error,
+    );
+  }
+
+  @override
+  List<Object?> get props => [errorMessage, status];
+}
