@@ -14,19 +14,26 @@ class StoreIconButtonContainer extends StatelessWidget {
     this.iconHeight = 15.75,
     this.iconColor = AppColors.blackMain,
     required this.callback,
+    this.borderRadius,
+    this.boxShadow
   });
 
   final String image;
   final double iconWidth, iconHeight,containerWidth, containerHeight;
   final Color iconColor, containerColor;
   final VoidCallback callback;
-
+  final BorderRadius? borderRadius;
+  final List<BoxShadow>? boxShadow;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: containerWidth.w,
       height: containerHeight.h,
-      color: containerColor,
+      decoration: BoxDecoration(
+        color: containerColor,
+        borderRadius: borderRadius,
+        boxShadow: boxShadow,
+      ),
       child: IconButton(
         padding: EdgeInsets.zero,
         onPressed: callback,

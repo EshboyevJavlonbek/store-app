@@ -41,6 +41,8 @@ class StoreTextFormField extends StatelessWidget {
         SizedBox(
           width: 341.w,
           child: TextFormField(
+            cursorColor: AppColors.blackMain,
+            cursorHeight: 22.h,
             controller: controller,
             autovalidateMode: autoValidateMode,
             validator: validator,

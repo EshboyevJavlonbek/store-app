@@ -1,22 +1,50 @@
-import 'package:flutter/widgets.dart';
-import 'package:store_app/data/repository/auth_repository.dart';
+import 'dart:ui';
 
-class SignUpBloc extends ChangeNotifier {
-  SignUpBloc({required AuthRepository repo}) : _repo = repo;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app/features/auth/manager/sign_up/sign_up_state.dart';
 
-  final formKey = GlobalKey<FormState>();
+import '../../../../core/utils/colors.dart';
+import '../../../../data/repository/auth_repository.dart';
+
+part 'sign_up_events.dart';
+
+class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final AuthRepository _repo;
 
-  final fullNameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  SignUpBloc({required AuthRepository repo}) :_repo = repo, super(SignUpState.initial()) {
+    on<SignUpRequested>(_onSignUpRequested);
+  }
 
-  Future<bool> signUp() async {
-    var result = await _repo.signUp(
-      fullName: fullNameController.text,
-      email: emailController.text,
-      password: passwordController.text,
-    );
-    return result;
+  Future<void> _onSignUpRequested(
+      SignUpRequested event, Emitter<SignUpState> emit) async {
+    emit(SignUpState.loading());
+
+    try {
+      final success = await _repo.signUp(
+        fullName: event.fullName,
+        email: event.email,
+        password: event.password,
+      );
+
+      if (success) {
+        emit(SignUpState.success());
+      } else {
+        emit(SignUpState.error("Sign up failed, please try again."));
+      }
+    } catch (e) {
+      emit(SignUpState.error(e.toString()));
+    }
+  }
+
+  bool? fullNameValid, emailValid, passwordValid;
+
+  Color getBackgroundColor() {
+    if (fullNameValid == null || emailValid == null || passwordValid == null) {
+      return AppColors.greySub;
+    }
+    if (!fullNameValid! || !emailValid! || !passwordValid!) {
+      return AppColors.greySub;
+    }
+    return AppColors.blackMain;
   }
 }

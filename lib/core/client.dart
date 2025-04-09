@@ -11,6 +11,15 @@ class ApiClient {
     ),
   )..interceptors.add(AuthInterceptor());
 
+  Future<T> genericGetRequest<T>(String path, {Map<String,dynamic>? queryParams}) async{
+    var response = await dio.get(path, queryParameters: queryParams);
+    if (response.statusCode == 200) {
+      return response.data as T;
+    }else{
+      throw DioException(requestOptions: response.requestOptions, response: response);
+    }
+  }
+
   Future<String> login(String email, String password) async {
     var response = await dio
         .post('/auth/login', data: {"login": email, "password": password});

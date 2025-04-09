@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:store_app/features/auth/pages/store_text_button.dart';
 import 'package:store_app/features/auth/widgets/or_item.dart';
 import 'package:store_app/features/common/widgets/store_app_button_with_logo.dart';
 
 import '../../../core/routing/routes.dart';
 import '../../../core/utils/colors.dart';
 import '../../common/widgets/store_app_button.dart';
-import '../manager/login/login_bloc.dart';
-import '../manager/login/login_state.dart';
 import '../../common/widgets/store_password_field.dart';
 import '../../common/widgets/store_text_form_field.dart';
 import '../../common/widgets/title_and_description.dart';
+import '../manager/login/login_bloc.dart';
+import '../manager/login/login_state.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -35,9 +36,7 @@ class _LoginViewState extends State<LoginView> {
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state.status == LoginStatus.success) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text("Ishladi malades!")));
+            context.go(Routes.home);
           } else if (state.status == LoginStatus.error) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.errorMessage ?? "Ishlamadi!")),
@@ -106,25 +105,21 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
               SizedBox(height: 12.h),
-              RichText(
-                text: TextSpan(
-                  text: "Forgot your password? ",
-                  style:
-                  TextStyle(color: AppColors.blackMain, fontSize: 14.r),
-                  children: [
-                    TextSpan(
-                      text: "Reset your password",
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => context.go(Routes.forgotPass),
-                      style: TextStyle(
-                        color: AppColors.blackMain,
-                        fontSize: 14.r,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration.underline,
-                      ),
+              StoreTextButton(
+                text: "Forgot your password? ",
+                children: [
+                  TextSpan(
+                    text: "Reset your password",
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => context.push(Routes.forgotPass),
+                    style: TextStyle(
+                      color: AppColors.blackMain,
+                      fontSize: 14.r,
+                      fontWeight: FontWeight.w500,
+                      decoration: TextDecoration.underline,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               SizedBox(height: 27.h),
               StoreAppButton(

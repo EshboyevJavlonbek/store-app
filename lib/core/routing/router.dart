@@ -1,5 +1,5 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:store_app/core/routing/routes.dart';
 import 'package:store_app/features/auth/manager/login/login_bloc.dart';
 import 'package:store_app/features/auth/manager/sign_up/sign_up_bloc.dart';
@@ -8,13 +8,15 @@ import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/res
 import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/verification_code_view.dart';
 import 'package:store_app/features/auth/pages/login_view.dart';
 import 'package:store_app/features/auth/pages/sign_up_view.dart';
+import 'package:store_app/features/home/manager/home_bloc.dart';
+import 'package:store_app/features/home/pages/home_view.dart';
 
 final router = GoRouter(
-  initialLocation: Routes.forgotPass,
+  initialLocation: Routes.signUp,
   routes: [
     GoRoute(
       path: Routes.login,
-      builder: (context, state) => ChangeNotifierProvider(
+      builder: (context, state) => BlocProvider(
         create: (context) => LoginBloc(
           repo: context.read(),
         ),
@@ -23,7 +25,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: Routes.signUp,
-      builder: (context, state) => ChangeNotifierProvider(
+      builder: (context, state) => BlocProvider(
         create: (context) => SignUpBloc(
           repo: context.read(),
         ),
@@ -41,6 +43,15 @@ final router = GoRouter(
     GoRoute(
       path: Routes.resetPass,
       builder: (context, state) => ResetPasswordView(),
+    ),
+    GoRoute(
+      path: Routes.home,
+      builder: (context, state) => BlocProvider(
+        create: (context) => HomeBloc(
+          repo: context.read(),
+        ),
+        child: HomeView(),
+      ),
     ),
   ],
 );
