@@ -9,13 +9,18 @@ class AuthRepository {
 
   String? jwt;
 
-  Future<void> login(String email, String password) async {
-    final String token = await client.login(email, password);
-    await SecureStorage.deleteToken();
-    await SecureStorage.deleteCredentials();
-    await SecureStorage.saveCredentials(login: email, password: password);
-    await SecureStorage.saveToken(token);
-    jwt = token;
+  Future<bool> login(String email, String password) async {
+    try {
+      final String token = await client.login(email, password);
+      await SecureStorage.deleteToken();
+      await SecureStorage.deleteCredentials();
+      await SecureStorage.saveCredentials(login: email, password: password);
+      await SecureStorage.saveToken(token);
+      jwt = token;
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<bool> signUp({

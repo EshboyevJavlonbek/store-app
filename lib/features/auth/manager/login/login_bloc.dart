@@ -1,34 +1,46 @@
-import 'package:flutter/widgets.dart';
-import 'package:store_app/data/repository/auth_repository.dart';
+import 'dart:ui';
 
-class LoginBloc extends ChangeNotifier {
-  LoginBloc({required AuthRepository repo}) : _repo = repo {
-    login();
-  }
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/colors.dart';
+import 'login_state.dart';
+import '../../../../data/repository/auth_repository.dart';
 
-  final formKey = GlobalKey<FormState>();
+part 'login_events.dart';
+
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository _repo;
 
-  String? _errorMessage;
+  LoginBloc({required AuthRepository repo})
+      : _repo = repo,
+        super(LoginState.initial()) {
+    on<LoginRequested>(_onLoginRequested);
+  }
 
-  bool get hasError => _errorMessage != null;
+  Future<void> _onLoginRequested(LoginRequested event, Emitter<LoginState> emit) async {
+    emit(LoginState.loading());
 
-  String? get errorMessage => _errorMessage;
-
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
-  Future<bool> login() async {
     try {
-      await _repo.login(emailController.text, passwordController.text);
-    } on Exception catch (e) {
-      _errorMessage = e.toString();
-      notifyListeners();
-      return false;
-    }
+      final success = await _repo.login(event.email, event.password);
 
-    _errorMessage = null;
-    notifyListeners();
-    return true;
+      if (success) {
+        emit(LoginState.success());
+      } else {
+        emit(LoginState.error("Login failed. Please try again."));
+      }
+    } catch (e) {
+      emit(LoginState.error("Something went wrong: ${e.toString()}"));
+    }
+  }
+
+  bool? emailValid, passwordValid;
+
+  Color getBackgroundColor(){
+    if (emailValid == null || passwordValid == null) {
+      return AppColors.greySub;
+    }
+    if (!emailValid! || !passwordValid!) {
+      return AppColors.greySub;
+    }
+    return AppColors.blackMain;
   }
 }

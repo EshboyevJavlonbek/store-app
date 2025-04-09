@@ -4,4 +4,5 @@ class Routes {
   static const String forgotPass = '/forgot-password';
   static const String resetPass = '/reset-password';
   static const String verificationCode = '/verification-code';
+  static const String home = '/home';
 }

@@ -10,12 +10,14 @@ class StorePasswordField extends StatefulWidget {
     required this.title,
     required this.hintText,
     required this.controller,
+    required this.isValid,
   });
 
   final String title, hintText;
   final TextEditingController controller;
 
   final String? Function(String? value) validator;
+  final bool? isValid;
 
   @override
   State<StorePasswordField> createState() => _StorePasswordFieldState();
@@ -46,10 +48,9 @@ class _StorePasswordFieldState extends State<StorePasswordField> {
           width: 341.w,
           child: TextFormField(
             controller: widget.controller,
-            focusNode: focusNode,
-            onTapOutside: (event) => focusNode.unfocus(),
             validator: widget.validator,
             maxLines: 1,
+            autovalidateMode: AutovalidateMode.onUnfocus,
             style: TextStyle(
               color: AppColors.blackMain,
               fontSize: 16.sp,
@@ -58,21 +59,56 @@ class _StorePasswordFieldState extends State<StorePasswordField> {
             obscureText: _obscure,
             obscuringCharacter: "*",
             decoration: InputDecoration(
-              suffixIcon: IconButton(
-                icon: SvgPicture.asset(
-                  switch (_obscure) {
-                    true => "StoreAppAssets/icons/hide_password.svg",
-                    false => "StoreAppAssets/icons/show_password.svg"
-                  },
-                  width: 19.69.w,
-                  height: 18.h,
-                  fit: BoxFit.cover,
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.error,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _obscure = !_obscure;
-                  });
-                },
+                borderRadius: BorderRadius.circular(10),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: widget.isValid != null && widget.isValid!
+                      ? Colors.green
+                      : AppColors.greySub,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  width: 2,
+                  color: widget.isValid != null && widget.isValid!
+                      ? Colors.green
+                      : AppColors.greySub,
+                ),
+              ),
+              suffixIconConstraints: BoxConstraints.loose(
+                Size(double.infinity, double.infinity),
+              ),
+              suffixIcon: Padding(
+                padding: EdgeInsets.only(right: 10.w),
+                child: AnimatedCrossFade(
+                  firstChild: IconButton(
+                    onPressed: () => setState(() => _obscure = !_obscure),
+                    icon: SvgPicture.asset(
+                      "StoreAppAssets/icons/hide_password.svg",
+                      width: 20.w,
+                      height: 20.w,
+                    ),
+                  ),
+                  secondChild: IconButton(
+                    onPressed: () => setState(() => _obscure = !_obscure),
+                    icon: SvgPicture.asset(
+                      "StoreAppAssets/icons/show_password.svg",
+                      width: 20.w,
+                      height: 20.w,
+                    ),
+                  ),
+                  crossFadeState: _obscure
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  duration: Duration(milliseconds: 100),
+                ),
               ),
               filled: true,
               fillColor: AppColors.white,
@@ -87,7 +123,7 @@ class _StorePasswordFieldState extends State<StorePasswordField> {
                   EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
               border: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: AppColors.whiteSub,
+                  color: AppColors.blackMain,
                   width: 1.w,
                 ),
                 borderRadius: BorderRadius.circular(10),
