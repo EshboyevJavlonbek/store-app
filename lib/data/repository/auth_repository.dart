@@ -2,6 +2,8 @@ import 'package:store_app/core/client.dart';
 import 'package:store_app/core/secure_storage.dart';
 import 'package:store_app/data/model/user_model.dart';
 
+import '../model/forgot_password_model.dart';
+
 class AuthRepository {
   AuthRepository({required this.client});
 
@@ -53,4 +55,22 @@ class AuthRepository {
     await SecureStorage.saveToken(jwt!);
     return true;
   }
+
+  Future<bool> forgotPassword(String email) async {
+    var result = await client.forgotPassword(email);
+    return result;
+  }
+
+  Future<bool> enterCode(String email, String code) async {
+    var result = await client.enterCode(email, code);
+    return result;
+  }
+
+  Future<bool> resetPassword({required String email,required String code,required  String password}) async {
+    var result = await client.resetPassword(
+      ForgotPasswordModel(email: email, password: password, code: code),
+    );
+    return result;
+  }
+
 }
