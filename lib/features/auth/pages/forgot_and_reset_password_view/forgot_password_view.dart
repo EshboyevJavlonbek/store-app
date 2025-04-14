@@ -26,6 +26,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   String buttonText = 'Send Code';
 
   @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: StoreAppBar(

@@ -5,8 +5,10 @@ class Routes {
   static const String resetPass = '/reset-password';
   static const String verificationCode = '/verification-code';
   static const String home = '/home';
+  static const String notification = '/notification';
   static const String checkout = '/checkout';
   static const String savedItems='/saved-items';
   static const String search = '/search';
   static const String detail = '/detail';
+  static const String myCart ='/my-cart';
 }

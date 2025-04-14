@@ -47,6 +47,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.1.5
+  speech_to_text: ^7.0.0
+  permission_handler: ^12.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -65,20 +67,20 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - StoreAppAssets/images/
-    - StoreAppAssets/icons/
+    - assets/images/
+    - assets/icons/
   fonts:
     - family: GeneralSans
       fonts:
-        - asset: StoreAppAssets/fonts/GeneralSans/GeneralSans-Light.otf
+        - asset: assets/fonts/GeneralSans/GeneralSans-Light.otf
           weight: 300
-        - asset: StoreAppAssets/fonts/GeneralSans/GeneralSans-Regular.otf
+        - asset: assets/fonts/GeneralSans/GeneralSans-Regular.otf
           weight: 400
-        - asset: StoreAppAssets/fonts/GeneralSans/GeneralSans-Medium.otf
+        - asset: assets/fonts/GeneralSans/GeneralSans-Medium.otf
           weight: 500
-        - asset: StoreAppAssets/fonts/GeneralSans/GeneralSans-SemiBold.otf
+        - asset: assets/fonts/GeneralSans/GeneralSans-SemiBold.otf
           weight: 600
-        - asset: StoreAppAssets/fonts/GeneralSans/GeneralSans-Bold.otf
+        - asset: assets/fonts/GeneralSans/GeneralSans-Bold.otf
           weight: 700
 
   # The following line ensures that the Material Icons font is

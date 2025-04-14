@@ -69,7 +69,7 @@ class StoreTextFormField extends StatelessWidget {
                 visible: isValid != null ? true : false,
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
-                  child: SvgPicture.asset("StoreAppAssets/icons/validation_${isValid != null && isValid! ? 'success' : 'error'}.svg",
+                  child: SvgPicture.asset("assets/icons/validation_${isValid != null && isValid! ? 'success' : 'error'}.svg",
                   width: 20.w,
                     height: 20.h,
                     fit: BoxFit.cover,

@@ -30,6 +30,13 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   String errorText = "";
 
   @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPassController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
       builder: (context, state) => Scaffold(
@@ -136,7 +143,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 SvgPicture.asset(
-                                  "StoreAppAssets/icons/dialog_success.svg",
+                                  "assets/icons/dialog_success.svg",
                                   width: 63.38.w,
                                   height: 63.38.h,
                                   fit: BoxFit.cover,
