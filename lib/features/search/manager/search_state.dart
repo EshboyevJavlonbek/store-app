@@ -1,29 +1,29 @@
 import 'package:equatable/equatable.dart';
 import 'package:store_app/data/model/category_model.dart';
 
-enum HomeStatus { idle, loading, error, success }
+enum SearchStatus { idle, loading, success, error }
 
-class HomeState extends Equatable {
+class SearchState extends Equatable {
   final List<CategoryModel> categories;
-  final HomeStatus status;
+  final SearchStatus status;
 
-  const HomeState({
+  const SearchState({
     required this.categories,
     required this.status,
   });
 
-  factory HomeState.initial() {
-    return HomeState(
+  factory SearchState.initial() {
+    return SearchState(
       categories: [],
-      status: HomeStatus.idle,
+      status: SearchStatus.idle,
     );
   }
 
-  HomeState copyWidth({
-    HomeStatus? status,
+  SearchState copyWith({
     List<CategoryModel>? categories,
+    SearchStatus? status,
   }) {
-    return HomeState(
+    return SearchState(
       categories: categories ?? this.categories,
       status: status ?? this.status,
     );

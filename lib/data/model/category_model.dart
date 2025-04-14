@@ -1,9 +1,10 @@
 class CategoryModel {
   final String image, title;
-  final int price, discount;
+  final int price, discount, id;
   final bool isLiked;
 
   CategoryModel({
+    required this.id,
     required this.image,
     required this.title,
     required this.price,
@@ -18,6 +19,7 @@ class CategoryModel {
       price: json['price'],
       discount: json['discount'],
       isLiked: json['isLiked'],
+      id: json['id'],
     );
   }
 }

@@ -41,7 +41,7 @@ class StoreModalBottomSheet extends StatelessWidget {
                   context.pop();
                 },
                 icon: SvgPicture.asset(
-                  "StoreAppAssets/icons/x.svg",
+                  "assets/icons/x.svg",
                   width: 15.76.w,
                   height: 15.76.h,
                   fit: BoxFit.cover,

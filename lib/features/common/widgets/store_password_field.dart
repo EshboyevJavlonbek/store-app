@@ -91,7 +91,7 @@ class _StorePasswordFieldState extends State<StorePasswordField> {
                   firstChild: IconButton(
                     onPressed: () => setState(() => _obscure = !_obscure),
                     icon: SvgPicture.asset(
-                      "StoreAppAssets/icons/hide_password.svg",
+                      "assets/icons/hide_password.svg",
                       width: 20.w,
                       height: 20.w,
                     ),
@@ -99,7 +99,7 @@ class _StorePasswordFieldState extends State<StorePasswordField> {
                   secondChild: IconButton(
                     onPressed: () => setState(() => _obscure = !_obscure),
                     icon: SvgPicture.asset(
-                      "StoreAppAssets/icons/show_password.svg",
+                      "assets/icons/show_password.svg",
                       width: 20.w,
                       height: 20.w,
                     ),
