@@ -11,6 +11,8 @@ class StorePasswordField extends StatefulWidget {
     required this.hintText,
     required this.controller,
     required this.isValid,
+    this.keyboardType,
+    this.maxLength,
   });
 
   final String title, hintText;
@@ -18,6 +20,9 @@ class StorePasswordField extends StatefulWidget {
 
   final String? Function(String? value) validator;
   final bool? isValid;
+  final TextInputType? keyboardType;
+
+  final int? maxLength;
 
   @override
   State<StorePasswordField> createState() => _StorePasswordFieldState();
@@ -47,6 +52,8 @@ class _StorePasswordFieldState extends State<StorePasswordField> {
         SizedBox(
           width: 341.w,
           child: TextFormField(
+            maxLength: widget.maxLength,
+            keyboardType: widget.keyboardType,
             controller: widget.controller,
             validator: widget.validator,
             maxLines: 1,

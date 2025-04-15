@@ -19,7 +19,7 @@ class VerificationBloc extends Bloc<VerificationEvents, VerificationState> {
   Future<void> _onEnterCodeRequested(VerificationRequested event, Emitter<VerificationState> emit) async {
     emit(VerificationState.loading());
     try {
-      final success = await _repo.forgotPassword(event.email);
+      final success = await _repo.enterCode(event.email, event.code);
 
       if (success) {
         emit(VerificationState.success());
