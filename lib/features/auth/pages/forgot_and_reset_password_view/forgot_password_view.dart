@@ -25,11 +25,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   String errorMassage = "This field is required.";
   String buttonText = 'Send Code';
 
-  @override
-  void dispose() {
-    emailController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

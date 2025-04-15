@@ -117,29 +117,32 @@ import 'package:store_app/core/utils/colors.dart';
 import 'package:store_app/features/common/widgets/store_icon_button_container.dart';
 
 class StoreAppCategoryItem extends StatefulWidget {
-  const StoreAppCategoryItem({
+   StoreAppCategoryItem({
     super.key,
     required this.image,
     required this.title,
     required this.price,
-    required this.discount, required this.id,
+    required this.discount,
+    required this.id,
+    required this.isValid
   });
 
   final String image, title;
   final int price;
   final int discount, id;
+   bool isValid;
 
   @override
   State<StoreAppCategoryItem> createState() => _StoreAppCategoryItemState();
 }
 
 class _StoreAppCategoryItemState extends State<StoreAppCategoryItem> {
-  bool isValid = false;
+
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: () {},
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         spacing: 8.h,
@@ -160,12 +163,11 @@ class _StoreAppCategoryItemState extends State<StoreAppCategoryItem> {
                   top: 12.h,
                   left: 115.w,
                   child: StoreIconButtonContainer(
-                    image:
-                        "assets/icons/${isValid ? 'heart_filled' : 'heart'}.svg",
-                    iconColor: isValid ? Colors.red : AppColors.blackMain,
+                    image: "assets/icons/${widget.isValid ? 'heart_filled' : 'heart'}.svg",
+                    iconColor: widget.isValid ? Colors.red : AppColors.blackMain,
                     callback: () {
                       setState(() {
-                        isValid = !isValid;
+                        widget.isValid = !widget.isValid;
                       });
                     },
                     containerWidth: 34.w,

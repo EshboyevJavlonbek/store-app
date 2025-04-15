@@ -51,7 +51,7 @@ class SavedItemsView extends StatelessWidget {
                     title: state.savedItems[index].title,
                     price: state.savedItems[index].price,
                     discount: state.savedItems[index].discount,
-                    id: state.savedItems[index].id),
+                    id: state.savedItems[index].id, isValid: state.savedItems[index].isLiked,),
               ),
         bottomNavigationBar: StoreBottomNavigationBar(),
       ),

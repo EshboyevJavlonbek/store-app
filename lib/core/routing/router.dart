@@ -11,6 +11,7 @@ import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/res
 import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/verification_code_view.dart';
 import 'package:store_app/features/auth/pages/login_view.dart';
 import 'package:store_app/features/auth/pages/sign_up_view.dart';
+import 'package:store_app/features/checkout/pages/checkout_view.dart';
 import 'package:store_app/features/details/pages/details_view.dart';
 import 'package:store_app/features/home/manager/home_bloc.dart';
 import 'package:store_app/features/home/pages/home_view.dart';
@@ -23,7 +24,7 @@ import 'package:store_app/features/search/manager/search_bloc.dart';
 import 'package:store_app/features/search/pages/search_view.dart';
 
 final router = GoRouter(
-  initialLocation: Routes.detail,
+  initialLocation: Routes.myCart,
   routes: [
     GoRoute(
       path: Routes.login,
@@ -124,6 +125,13 @@ final router = GoRouter(
       path: Routes.detail,
       builder: (context, state) => DetailsView(),
     ),
-    GoRoute(path: Routes.myCart,builder: (context, state) => MyCartView(),)
+    GoRoute(
+      path: Routes.myCart,
+      builder: (context, state) => MyCartView(),
+    ),
+    GoRoute(
+      path: Routes.checkout,
+      builder: (context, state) => CheckoutView(),
+    ),
   ],
 );

@@ -67,9 +67,7 @@ class AuthRepository {
   }
 
   Future<bool> resetPassword({required String email,required String code,required  String password}) async {
-    var result = await client.resetPassword(
-      ForgotPasswordModel(email: email, password: password, code: code),
-    );
+    var result = await client.resetPassword(email, code, password);
     return result;
   }
 

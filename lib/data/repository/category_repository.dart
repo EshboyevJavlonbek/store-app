@@ -19,9 +19,11 @@ class CategoryRepository {
   }
 
   Future<List<CategoryModel>> getSavedItems() async {
-    var rawSavedItems = await client.genericGetRequest<List<dynamic>>('');
+    var rawSavedItems = await client.genericGetRequest<List<dynamic>>('/products/saved-products');
     categories =
         rawSavedItems.map((item) => CategoryModel.fromJson(item)).toList();
     return categories;
   }
+
+
 }
