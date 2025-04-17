@@ -5,7 +5,7 @@ enum HomeStatus { idle, loading, error, success }
 
 class HomeState extends Equatable {
   final List<CategoryModel> categories;
-  final HomeStatus? status;
+  final HomeStatus status;
 
   const HomeState({
     required this.categories,

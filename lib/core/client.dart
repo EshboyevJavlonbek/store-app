@@ -3,8 +3,6 @@ import 'package:store_app/core/exceptions/auth_exception.dart';
 import 'package:store_app/core/interceptor.dart';
 import 'package:store_app/data/model/user_model.dart';
 
-import '../data/model/forgot_password_model.dart';
-
 class ApiClient {
   final Dio dio = Dio(
     BaseOptions(
@@ -71,10 +69,14 @@ class ApiClient {
     }
   }
 
-  Future<bool> resetPassword(ForgotPasswordModel model) async {
+  Future<bool> resetPassword(String email, String code, String password) async {
     var response = await dio.post(
       "/auth/reset-password/reset",
-      data: model.toJson(),
+      data: {
+        "email": email,
+        "code": code,
+        "password": password,
+      },
     );
     if (response.statusCode == 200) {
       return true;

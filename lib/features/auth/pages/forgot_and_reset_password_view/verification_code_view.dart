@@ -31,6 +31,12 @@ class _VerificationCodeViewState extends State<VerificationCodeView> {
   String buttonText = "Continue";
 
   @override
+  void dispose() {
+    pinController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<VerificationBloc, VerificationState>(
       builder: (context, state) => Scaffold(

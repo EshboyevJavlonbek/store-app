@@ -11,14 +11,20 @@ import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/res
 import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/verification_code_view.dart';
 import 'package:store_app/features/auth/pages/login_view.dart';
 import 'package:store_app/features/auth/pages/sign_up_view.dart';
+import 'package:store_app/features/checkout/pages/checkout_view.dart';
 import 'package:store_app/features/details/pages/details_view.dart';
 import 'package:store_app/features/home/manager/home_bloc.dart';
 import 'package:store_app/features/home/pages/home_view.dart';
+import 'package:store_app/features/my_cart/pages/my_cart_view.dart';
+import 'package:store_app/features/notification/manager/notification_bloc.dart';
+import 'package:store_app/features/notification/pages/notification_view.dart';
+import 'package:store_app/features/saved_items/manager/saved_items_bloc.dart';
 import 'package:store_app/features/saved_items/pages/saved_items_view.dart';
+import 'package:store_app/features/search/manager/search_bloc.dart';
 import 'package:store_app/features/search/pages/search_view.dart';
 
 final router = GoRouter(
-  initialLocation: Routes.detail,
+  initialLocation: Routes.myCart,
   routes: [
     GoRoute(
       path: Routes.login,
@@ -89,16 +95,43 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
-      path: Routes.savedItems,
-      builder: (context, state) => SavedItemsView(),
+      path: Routes.notification,
+      builder: (context, state) => BlocProvider(
+        create: (context) => NotificationBloc(
+          repo: context.read(),
+        ),
+        child: NotificationView(),
+      ),
     ),
     GoRoute(
       path: Routes.search,
-      builder: (context, state) => SearchView(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => SearchBloc(
+          repo: context.read(),
+        ),
+        child: SearchView(),
+      ),
+    ),
+    GoRoute(
+      path: Routes.savedItems,
+      builder: (context, state) => BlocProvider(
+        create: (context) => SavedItemsBloc(
+          repo: context.read(),
+        ),
+        child: SavedItemsView(),
+      ),
     ),
     GoRoute(
       path: Routes.detail,
       builder: (context, state) => DetailsView(),
+    ),
+    GoRoute(
+      path: Routes.myCart,
+      builder: (context, state) => MyCartView(),
+    ),
+    GoRoute(
+      path: Routes.checkout,
+      builder: (context, state) => CheckoutView(),
     ),
   ],
 );

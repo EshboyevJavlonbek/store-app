@@ -29,6 +29,8 @@ class HomeView extends StatelessWidget {
             title: state.categories[index].title,
             price: state.categories[index].price,
             discount: state.categories[index].discount,
+            id: state.categories[index].id,
+            isValid: state.categories[index].isLiked,
           ),
         ),
         bottomNavigationBar: StoreBottomNavigationBar(),

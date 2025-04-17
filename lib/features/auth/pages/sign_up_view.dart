@@ -30,6 +30,14 @@ class _SignUpViewState extends State<SignUpView> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    fullNameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var bloc = context.watch<SignUpBloc>();
     return BlocConsumer<SignUpBloc, SignUpState>(
@@ -174,7 +182,7 @@ class _SignUpViewState extends State<SignUpView> {
             OrItem(),
             SizedBox(height: 24.h),
             StoreAppButtonWithLogo(
-              image: "StoreAppAssets/icons/google_logo.svg",
+              image: "assets/icons/google_logo.svg",
               title: "Login with Google",
               padding: EdgeInsets.symmetric(horizontal: 84.w),
               callback: () {},
@@ -184,7 +192,7 @@ class _SignUpViewState extends State<SignUpView> {
             ),
             SizedBox(height: 10.h),
             StoreAppButtonWithLogo(
-              image: "StoreAppAssets/icons/facebook_logo.svg",
+              image: "assets/icons/facebook_logo.svg",
               title: "Login with Facebook",
               padding: EdgeInsets.symmetric(horizontal: 77.w),
               callback: () {},

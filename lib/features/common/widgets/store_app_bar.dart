@@ -40,7 +40,7 @@ class StoreAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: Align(
           alignment: Alignment.centerLeft,
           child: StoreIconButtonContainer(
-            image: "StoreAppAssets/icons/back-arrow.svg",
+            image: "assets/icons/back-arrow.svg",
             callback: () => context.pop(),
           ),
         ),
