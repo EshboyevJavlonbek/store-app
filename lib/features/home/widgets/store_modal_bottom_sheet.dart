@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:store_app/core/utils/colors.dart';
-import 'package:store_app/features/home/widgets/filters_item.dart';
 import 'package:store_app/features/common/widgets/store_button_container.dart';
 import 'package:store_app/features/home/widgets/store_drop_down_button.dart';
 
