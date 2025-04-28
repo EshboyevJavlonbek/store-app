@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:store_app/data/model/category_model.dart';
+import 'package:store_app/data/model/product_model.dart';
 
 enum SavedItemsStatus { idle, loading, error, success }
 
 class SavedItemsState extends Equatable {
-  final List<CategoryModel> savedItems;
+  final List<ProductModel> savedItems;
   final SavedItemsStatus status;
 
   const SavedItemsState({
@@ -20,7 +20,7 @@ class SavedItemsState extends Equatable {
   }
 
   SavedItemsState copyWith(
-      {List<CategoryModel>? savedItems, SavedItemsStatus? status}) {
+      {List<ProductModel>? savedItems, SavedItemsStatus? status}) {
     return SavedItemsState(
       savedItems: savedItems ?? this.savedItems,
       status: status ?? this.status,

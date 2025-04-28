@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:store_app/data/model/category_model.dart';
+import 'package:store_app/data/model/product_model.dart';
 
 enum SearchStatus { idle, loading, success, error }
 
 class SearchState extends Equatable {
-  final List<CategoryModel> categories;
+  final List<ProductModel> categories;
   final SearchStatus status;
 
   const SearchState({
@@ -20,7 +20,7 @@ class SearchState extends Equatable {
   }
 
   SearchState copyWith({
-    List<CategoryModel>? categories,
+    List<ProductModel>? categories,
     SearchStatus? status,
   }) {
     return SearchState(

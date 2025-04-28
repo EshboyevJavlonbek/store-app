@@ -84,4 +84,22 @@ class ApiClient {
       return false;
     }
   }
+
+  Future<bool> saveItem({required int productId}) async{
+    var response = await dio.post('/auth/save/$productId');
+    if (response.statusCode == 200) {
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  Future<bool> unSaveItem({required int productId}) async{
+    var response = await dio.post('/auth/unsave/$productId');
+    if (response.statusCode == 200) {
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

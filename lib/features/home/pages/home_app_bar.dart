@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:store_app/core/routing/routes.dart';
 import 'package:store_app/core/utils/colors.dart';
+import 'package:store_app/data/model/category_model.dart';
 import 'package:store_app/features/common/widgets/store_button_container.dart';
 import 'package:store_app/features/common/widgets/store_icon_button_container.dart';
 import 'package:store_app/features/home/manager/home_bloc.dart';
@@ -14,7 +15,10 @@ import 'package:store_app/features/home/widgets/store_modal_bottom_sheet.dart';
 class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
   const HomeAppBar({
     super.key,
+    required this.state,
   });
+
+  final List<CategoryModel> state;
 
   @override
   State<HomeAppBar> createState() => _HomeAppBarState();
@@ -24,8 +28,8 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _HomeAppBarState extends State<HomeAppBar> {
-
   final controller = TextEditingController();
+  int selectedIndex = -1;
 
   @override
   void dispose() {
@@ -111,7 +115,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                           image: "assets/icons/microphone.svg",
                           callback: () {},
                           iconColor: AppColors.greySub,
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -142,20 +146,35 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ),
               SizedBox(
                 height: 36.h,
-                child: SingleChildScrollView(
+                child: ListView.builder(
+                  itemCount: widget.state.length,
                   scrollDirection: Axis.horizontal,
-                  child: Row(
-                    spacing: 10.w,
+                  itemBuilder: (BuildContext context, int index) => Row(
                     children: [
-                      StoreButtonContainer(title: "All", callback: () {}),
-                      StoreButtonContainer(title: "T-shirts", callback: () {}),
-                      StoreButtonContainer(title: "Jeans", callback: () {}),
-                      StoreButtonContainer(title: "Shoes", callback: () {}),
-                      StoreButtonContainer(title: "Hats", callback: () {}),
+                      StoreButtonContainer(
+                        title: widget.state[index].title,
+                        callback: () {
+                          context.read<HomeBloc>().add(
+                            HomeLoad(
+                              categoryId: widget.state[index].id,
+                            ),
+                          );
+                          setState(() {
+                            selectedIndex = index;
+                          });
+                        },
+                        textColor: selectedIndex == index
+                            ? AppColors.white
+                            : AppColors.blackMain,
+                        buttonColor: selectedIndex == index
+                            ? AppColors.blackMain
+                            : AppColors.white,
+                      ),
+                      SizedBox(width: 10.w),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -163,3 +182,4 @@ class _HomeAppBarState extends State<HomeAppBar> {
     );
   }
 }
+

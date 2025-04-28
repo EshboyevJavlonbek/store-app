@@ -49,6 +49,9 @@ dependencies:
   path_provider: ^2.1.5
   speech_to_text: ^7.0.0
   permission_handler: ^12.0.0+1
+  intl_phone_field: ^3.2.0
+  intl: ^0.20.2
+  build_runner: ^2.4.15
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +63,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  freezed: ^3.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
