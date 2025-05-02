@@ -27,7 +27,6 @@ class StarRating extends StatelessWidget {
               index < rating ? Colors.yellow : const Color(0xffE6E6E6),
               BlendMode.saturation,
             )
-
           ),
         );
       }),

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:store_app/core/routing/routes.dart';
 
-class StoreAppSplashScreen extends StatefulWidget {
-  const StoreAppSplashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<StoreAppSplashScreen> createState() => _StoreAppSplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _StoreAppSplashScreenState extends State<StoreAppSplashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();

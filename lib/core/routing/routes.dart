@@ -1,4 +1,5 @@
 class Routes {
+  static const String onboarding = '/onboarding';
   static const String login = '/login';
   static const String signUp = '/sign-up';
   static const String forgotPass = '/forgot-password';

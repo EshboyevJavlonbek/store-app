@@ -8,6 +8,7 @@ import 'package:store_app/features/auth/manager/login/login_bloc.dart';
 import 'package:store_app/features/auth/manager/reset_password/reset_password_bloc.dart';
 import 'package:store_app/features/auth/manager/sign_up/sign_up_bloc.dart';
 import 'package:store_app/features/auth/manager/verification/verification_bloc.dart';
+import 'package:store_app/features/auth/onboarding/onboarding.dart';
 import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/forgot_password_view.dart';
 import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/reset_password_view.dart';
 import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/verification_code_view.dart';
@@ -21,9 +22,6 @@ import 'package:store_app/features/home/manager/home_bloc.dart';
 import 'package:store_app/features/home/pages/home_view.dart';
 import 'package:store_app/features/my_cart/pages/my_cart_view.dart';
 import 'package:store_app/features/my_details/pages/my_details_view.dart';
-import 'package:store_app/features/notification/manager/notification_bloc.dart';
-import 'package:store_app/features/notification/pages/notification_view.dart';
-import 'package:store_app/features/notification/pages/settings_view.dart';
 import 'package:store_app/features/orders/pages/orders_view.dart';
 import 'package:store_app/features/saved_items/manager/saved_items_bloc.dart';
 import 'package:store_app/features/saved_items/pages/saved_items_view.dart';
@@ -41,6 +39,10 @@ final router = GoRouter(
     return null;
   },
   routes: [
+    GoRoute(
+      path: Routes.onboarding,
+      builder: (context, state) => Onboarding(),
+    ),
     GoRoute(
       path: Routes.login,
       builder: (context, state) => BlocProvider(
@@ -110,15 +112,7 @@ final router = GoRouter(
         child: HomeView(),
       ),
     ),
-    GoRoute(
-      path: Routes.notification,
-      builder: (context, state) => BlocProvider(
-        create: (context) => NotificationBloc(
-          repo: context.read(),
-        ),
-        child: NotificationView(),
-      ),
-    ),
+
     GoRoute(
       path: Routes.search,
       builder: (context, state) => BlocProvider(
@@ -169,9 +163,6 @@ final router = GoRouter(
       path: Routes.myDetail,
       builder: (context, state) => MyDetailView(),
     ),
-    GoRoute(
-      path: Routes.settings,
-      builder: (context, state) => SettingsView(),
-    ),
+
   ],
 );

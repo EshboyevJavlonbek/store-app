@@ -5,8 +5,8 @@ import 'package:store_app/core/routing/routes.dart';
 
 import '../../common/widgets/store_button_container.dart';
 
-class StoreAppOnboarding extends StatelessWidget {
-  const StoreAppOnboarding({super.key});
+class Onboarding extends StatelessWidget {
+  const Onboarding({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +51,6 @@ class StoreAppOnboarding extends StatelessWidget {
               textColor: Colors.white,
               buttonColor: Colors.black,
               callback: () {context.go(Routes.signUp);},
-              svgPath: "assets/icons/right_arrow.svg",
-              svgSize: 14,
             ),
             SizedBox(height: 20),
             Container(
