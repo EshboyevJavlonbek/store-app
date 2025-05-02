@@ -13,9 +13,8 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   })  : _reviewsRepo = reviewsRepo,
         super(ReviewsState.initial()) {
     on<ReviewsLoading>(_onLoad);
-    on<SortReviews>(_onSort); // Qo‘shib qo‘yilgan!
+    on<SortReviews>(_onSort);
 
-    // Yuklashni boshlash
     add(ReviewsLoading(productId: productId));
   }
 

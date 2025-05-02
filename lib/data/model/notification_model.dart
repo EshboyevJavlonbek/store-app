@@ -1,7 +1,10 @@
 class NotificationModel {
-  final String image, title, subTitle, date;
+  final int id;
+  final String image, title, subTitle;
+  final DateTime date;
 
   NotificationModel({
+    required this.id,
     required this.image,
     required this.title,
     required this.subTitle,
@@ -10,10 +13,11 @@ class NotificationModel {
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
     return NotificationModel(
-      image: json['image'],
+      id: json['id'],
       title: json['title'],
-      subTitle: json['subTitle'],
-      date: json['date'],
+      image: json['icon'],
+      subTitle: json['content'],
+      date: DateTime.parse(json['date']),
     );
   }
 }
