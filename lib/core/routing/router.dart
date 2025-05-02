@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:store_app/core/check/login_check.dart';
 import 'package:store_app/core/routing/routes.dart';
 import 'package:store_app/features/account/pages/account_view.dart';
 import 'package:store_app/features/auth/manager/forgot_password/forgot_password_bloc.dart';
@@ -31,6 +32,14 @@ import 'package:store_app/features/search/pages/search_view.dart';
 
 final router = GoRouter(
   initialLocation: Routes.login,
+  redirect: (context, state) async {
+    final loggedIn = await LoginCheck.checkLoginStatus();
+    final loggingIn = state.matchedLocation == '/login';
+
+    if (!loggedIn && !loggingIn) return '/login';
+    if (loggedIn && loggingIn) return '/home';
+    return null;
+  },
   routes: [
     GoRoute(
       path: Routes.login,
