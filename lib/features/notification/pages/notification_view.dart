@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:store_app/core/utils/colors.dart';
 import 'package:store_app/features/common/widgets/store_app_bar.dart';
 import 'package:store_app/features/common/widgets/store_bottom_navigation_bar.dart';
@@ -18,7 +19,7 @@ class NotificationView extends StatelessWidget {
       builder: (context, state) => Scaffold(
         appBar: StoreAppBar(
           title: "Notifications",
-          actions: [],
+          actions: [SvgPicture.asset("assets/icons/notification.svg")],
           bottom: PreferredSize(
             preferredSize: Size(double.infinity, 24.h),
             child: Divider(
@@ -27,20 +28,22 @@ class NotificationView extends StatelessWidget {
           ),
         ),
         extendBody: true,
-        body: state.notifications.isEmpty
-            ? StoreNullBody(
-                image: "assets/icons/no_notification.svg",
-                title: "You haven’t gotten any notifications yet!",
-                subTitle: "We’ll alert you when something cool happens.",
-              )
-            : ListView.builder(
-                itemCount: state.notifications.length,
-                itemBuilder: (context, index) => NotificationItem(
-                  image: state.notifications[index].image,
-                  title: state.notifications[index].title,
-                  subTitle: state.notifications[index].subTitle,
+        body: SafeArea(
+          child: state.notifications.isEmpty
+              ? StoreNullBody(
+                  image: "assets/icons/no_notification.svg",
+                  title: "You haven’t gotten any notifications yet!",
+                  subTitle: "We’ll alert you when something cool happens.",
+                )
+              : ListView.builder(
+                  itemCount: state.notifications.length,
+                  itemBuilder: (context, index) => NotificationItem(
+                    image: state.notifications[index].image,
+                    title: state.notifications[index].title,
+                    subTitle: state.notifications[index].subTitle,
+                  ),
                 ),
-              ),
+        ),
         bottomNavigationBar: StoreBottomNavigationBar(),
       ),
     );
