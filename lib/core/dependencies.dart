@@ -4,6 +4,7 @@ import 'package:store_app/core/client.dart';
 import 'package:store_app/data/repository/auth_repository.dart';
 import 'package:store_app/data/repository/category_repository.dart';
 import 'package:store_app/data/repository/detail_repository.dart';
+import 'package:store_app/data/repository/product_repository.dart';
 import 'package:store_app/data/repository/notification_repository.dart';
 import 'package:store_app/data/repository/reviews_repository.dart';
 import 'package:store_app/data/repository/search_repository.dart';
@@ -18,7 +19,7 @@ final List<SingleChildWidget> providers = [
     ),
   ),
   Provider(
-    create: (context) => CategoryRepository(
+    create: (context) => ProductRepository(
       client: context.read(),
     ),
   ),
@@ -38,4 +39,9 @@ final List<SingleChildWidget> providers = [
     ),
   ),
   Provider(create: (context) => DetailRepository(client: context.read()))
+    create: (context) => CategoryRepository(
+      client: context.read(),
+    ),
+  ),
+
 ];

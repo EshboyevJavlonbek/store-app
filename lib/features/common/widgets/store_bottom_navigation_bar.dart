@@ -57,7 +57,7 @@ class StoreBottomNavigationBar extends StatelessWidget {
             SizedBox(
               height: 42.h,
               child: GestureDetector(
-                onTap: () => context.push(Routes.search),
+                onTap: () => context.go(Routes.search),
                 child: Column(
                   children: [
                     SvgPicture.asset(
@@ -81,14 +81,15 @@ class StoreBottomNavigationBar extends StatelessWidget {
             SizedBox(
               height: 42.h,
               child: GestureDetector(
-                onTap: () => context.push(Routes.savedItems),
+                onTap: () => context.go(Routes.savedItems),
                 child: Column(
                   children: [
                     SvgPicture.asset(
                       "assets/icons/heart.svg",
                       width: 21.75.w,
                       height: 18.75.h,
-                      colorFilter: ColorFilter.mode(AppColors.grey, BlendMode.srcIn),
+                      colorFilter:
+                          ColorFilter.mode(AppColors.grey, BlendMode.srcIn),
                       fit: BoxFit.cover,
                     ),
                     Text(
@@ -106,7 +107,7 @@ class StoreBottomNavigationBar extends StatelessWidget {
             SizedBox(
               height: 42.h,
               child: GestureDetector(
-                onTap: () => context.push(Routes.myCart),
+                onTap: () => context.go(Routes.myCart),
                 child: Column(
                   children: [
                     SvgPicture.asset(
@@ -130,7 +131,7 @@ class StoreBottomNavigationBar extends StatelessWidget {
             SizedBox(
               height: 42.h,
               child: GestureDetector(
-                onTap: () {},
+                onTap: () => context.go(Routes.account),
                 child: Column(
                   children: [
                     SvgPicture.asset(
