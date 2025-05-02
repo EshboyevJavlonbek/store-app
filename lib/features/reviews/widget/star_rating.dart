@@ -21,7 +21,7 @@ class StarRating extends StatelessWidget {
             "assets/icons/star_filled.svg",
             width: size,
             height: size - 2,
-            colorFilter: ColorFilter.mode(index < rating ? null : const Color(0xffE6E6E6), BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(index < rating ? Colors.transparent : const Color(0xffE6E6E6), BlendMode.srcIn),
           ),
         );
       }),
