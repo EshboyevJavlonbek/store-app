@@ -8,6 +8,7 @@ import 'package:store_app/core/utils/themes.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(StoreApp());
 }
 
