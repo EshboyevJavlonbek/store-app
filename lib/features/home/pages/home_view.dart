@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:store_app/core/utils/colors.dart';
 import 'package:store_app/features/common/widgets/home_category_item.dart';
 import 'package:store_app/features/common/widgets/store_bottom_navigation_bar.dart';
 import 'package:store_app/features/home/manager/home_bloc.dart';
@@ -41,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
               crossAxisSpacing: 10.w,
             ),
             itemCount: state.products.length,
-            itemBuilder: (context, index) => HomeCategoryItem(
+            itemBuilder: (context, index) => HomeProductItem(
               image: state.products[index].image,
               title: state.products[index].title,
               price: state.products[index].price,

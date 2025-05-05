@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:store_app/data/model/category_model.dart';
-import 'package:store_app/data/model/product_model.dart';
+import 'package:store_app/data/model/category/category_model.dart';
+import 'package:store_app/data/model/product/product_model.dart';
 
 enum HomeStatus { idle, loading, error, success }
 

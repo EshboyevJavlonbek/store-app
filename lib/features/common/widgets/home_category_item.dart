@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:store_app/core/utils/colors.dart';
 import 'package:store_app/features/common/widgets/store_icon_button_container.dart';
 import 'package:store_app/features/home/manager/home_bloc.dart';
 import 'package:store_app/features/home/manager/home_events.dart';
 
-class HomeCategoryItem extends StatefulWidget {
-  const HomeCategoryItem({
+import '../../../core/routing/routes.dart';
+
+class HomeProductItem extends StatefulWidget {
+  const HomeProductItem({
     super.key,
     required this.image,
     required this.title,
@@ -23,10 +26,10 @@ class HomeCategoryItem extends StatefulWidget {
   final bool isLiked;
 
   @override
-  State<HomeCategoryItem> createState() => _HomeCategoryItemState();
+  State<HomeProductItem> createState() => _HomeProductItemState();
 }
 
-class _HomeCategoryItemState extends State<HomeCategoryItem> {
+class _HomeProductItemState extends State<HomeProductItem> {
   late bool isValid = widget.isLiked;
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class _HomeCategoryItemState extends State<HomeCategoryItem> {
       child: Stack(
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () => context.push(Routes.getDetail(widget.id)),
             child: Container(
               color: AppColors.white,
               child: Column(

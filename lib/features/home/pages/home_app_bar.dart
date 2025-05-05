@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:store_app/core/routing/routes.dart';
 import 'package:store_app/core/utils/colors.dart';
-import 'package:store_app/data/model/category_model.dart';
+import 'package:store_app/data/model/category/category_model.dart';
 import 'package:store_app/features/common/widgets/store_button_container.dart';
 import 'package:store_app/features/common/widgets/store_icon_button_container.dart';
 import 'package:store_app/features/home/manager/home_bloc.dart';
