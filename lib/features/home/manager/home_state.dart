@@ -1,19 +1,16 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:store_app/data/model/category/category_model.dart';
 import 'package:store_app/data/model/product/product_model.dart';
-
+part 'home_state.freezed.dart';
 enum HomeStatus { idle, loading, error, success }
 
-class HomeState extends Equatable {
-  final List<ProductModel> products;
-  final List<CategoryModel> categories;
-  final HomeStatus status;
-
-  const HomeState({
-    required this.categories,
-    required this.products,
-    required this.status,
-  });
+@freezed
+abstract class HomeState with _$HomeState {
+  const factory HomeState({
+    required List<CategoryModel> categories,
+    required List<ProductModel> products,
+    required HomeStatus status,
+  }) =_HomeState;
 
   factory HomeState.initial() {
     return HomeState(
@@ -23,18 +20,4 @@ class HomeState extends Equatable {
     );
   }
 
-  HomeState copyWidth({
-    HomeStatus? status,
-    List<ProductModel>? products,
-    List<CategoryModel>? categories,
-  }) {
-    return HomeState(
-      categories: categories ?? this.categories,
-      products: products ?? this.products,
-      status: status ?? this.status,
-    );
-  }
-
-  @override
-  List<Object?> get props => [products, status, categories];
 }

@@ -13,10 +13,9 @@ class CategoryRepository implements ICategoryRepository {
 
   @override
   Future<List<CategoryModel>> getCategories() async {
-    if (isBool) {
-      return localRepo.getCategories();
-    } else {
-      return remoteRepo.getCategories();
-    }
+    final categories = await localRepo.getCategories();
+    if (categories.isNotEmpty) return categories;
+
+    return await remoteRepo.getCategories();
   }
 }
