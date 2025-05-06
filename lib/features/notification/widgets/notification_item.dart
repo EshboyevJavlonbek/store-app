@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:store_app/core/utils/colors.dart';
+import 'package:intl/intl.dart';
 
 class NotificationItem extends StatelessWidget {
   const NotificationItem({
@@ -9,13 +10,17 @@ class NotificationItem extends StatelessWidget {
     required this.image,
     required this.title,
     required this.subTitle,
-
+    required this.date,
   });
 
   final String image, title, subTitle;
+  final DateTime date;
 
   @override
   Widget build(BuildContext context) {
+    String formattedDate = DateFormat('dd,MM,yyyy').format(date);
+    String formattedTime = DateFormat('hh:mm:ss').format(date);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
       child: Column(
@@ -57,12 +62,20 @@ class NotificationItem extends StatelessWidget {
                   ],
                 ),
               ),
+              Text(
+                '$formattedDate at $formattedTime',
+                style: TextStyle(
+                  color: AppColors.blackMain,
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+
             ],
           ),
           Divider(
             color: AppColors.whiteSub,
           ),
-
         ],
       ),
     );

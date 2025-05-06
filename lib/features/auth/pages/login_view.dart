@@ -77,7 +77,7 @@ class _LoginViewState extends State<LoginView> {
                           return "This field is required.";
                         }
                         final emailRegex =
-                            RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                            RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
                         if (!emailRegex.hasMatch(value)) {
                           bloc.emailValid = false;
                           setState(() {});
@@ -140,6 +140,9 @@ class _LoginViewState extends State<LoginView> {
                         password: passwordController.text,
                       ),
                     );
+                    // if (state.status == LoginStatus.success) {
+                      context.go(Routes.notification);
+                    // }
                   }
                 },
               ),

@@ -10,7 +10,6 @@ class NotificationRepository {
     try {
       final response = await client
           .genericGetRequest<List<dynamic>>('/notifications/list');
-
       final notifications = response
           .map((item) =>
               NotificationModel.fromJson(item as Map<String, dynamic>))

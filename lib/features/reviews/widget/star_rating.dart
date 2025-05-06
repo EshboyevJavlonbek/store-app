@@ -18,17 +18,16 @@ class StarRating extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(right: 8),
           child: SvgPicture.asset(
-            index < rating
-                ? "assets/icons/star_filled.svg"
-                : "assets/icons/star_empty.svg",
+            "assets/icons/star.svg",
             width: size,
             height: size - 2,
-            colorFilter:ColorFilter.mode(
-              index < rating ? Colors.yellow : const Color(0xffE6E6E6),
-              BlendMode.saturation,
-            )
+            colorFilter: ColorFilter.mode(
+              index < rating ? Colors.orange : const Color(0xffE6E6E6),
+              BlendMode.srcIn,
+            ),
+          )
 
-          ),
+
         );
       }),
     );

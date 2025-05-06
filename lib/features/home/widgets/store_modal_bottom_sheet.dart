@@ -6,6 +6,8 @@ import 'package:store_app/core/utils/colors.dart';
 import 'package:store_app/features/common/widgets/store_button_container.dart';
 import 'package:store_app/features/home/widgets/store_drop_down_button.dart';
 
+import 'filters_item.dart';
+
 class StoreModalBottomSheet extends StatelessWidget {
   const StoreModalBottomSheet({
     super.key,

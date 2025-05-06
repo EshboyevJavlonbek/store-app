@@ -51,8 +51,8 @@ class StoreAppOnboarding extends StatelessWidget {
               textColor: Colors.white,
               buttonColor: Colors.black,
               callback: () {context.go(Routes.signUp);},
-              svgPath: "assets/icons/right_arrow.svg",
-              svgSize: 14,
+              icon: "assets/icons/right_arrow.svg",
+
             ),
             SizedBox(height: 20),
             Container(

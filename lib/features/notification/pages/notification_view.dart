@@ -41,6 +41,7 @@ class NotificationView extends StatelessWidget {
                     image: state.notifications[index].image,
                     title: state.notifications[index].title,
                     subTitle: state.notifications[index].subTitle,
+                    date: state.notifications[index].date,
                   ),
                 ),
         ),

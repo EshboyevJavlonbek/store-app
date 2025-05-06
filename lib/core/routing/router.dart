@@ -6,26 +6,40 @@ import 'package:store_app/features/auth/manager/login/login_bloc.dart';
 import 'package:store_app/features/auth/manager/reset_password/reset_password_bloc.dart';
 import 'package:store_app/features/auth/manager/sign_up/sign_up_bloc.dart';
 import 'package:store_app/features/auth/manager/verification/verification_bloc.dart';
+import 'package:store_app/features/auth/onboarding/store_app_onboarding.dart';
+import 'package:store_app/features/auth/onboarding/store_app_splash_screen.dart';
 import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/forgot_password_view.dart';
 import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/reset_password_view.dart';
 import 'package:store_app/features/auth/pages/forgot_and_reset_password_view/verification_code_view.dart';
 import 'package:store_app/features/auth/pages/login_view.dart';
 import 'package:store_app/features/auth/pages/sign_up_view.dart';
 import 'package:store_app/features/checkout/pages/checkout_view.dart';
+import 'package:store_app/features/details/maneger/details_bloc.dart';
 import 'package:store_app/features/details/pages/details_view.dart';
 import 'package:store_app/features/home/manager/home_bloc.dart';
 import 'package:store_app/features/home/pages/home_view.dart';
 import 'package:store_app/features/my_cart/pages/my_cart_view.dart';
 import 'package:store_app/features/notification/manager/notification_bloc.dart';
 import 'package:store_app/features/notification/pages/notification_view.dart';
+import 'package:store_app/features/reviews/maneger/reviews_bloc.dart';
 import 'package:store_app/features/saved_items/manager/saved_items_bloc.dart';
 import 'package:store_app/features/saved_items/pages/saved_items_view.dart';
 import 'package:store_app/features/search/manager/search_bloc.dart';
 import 'package:store_app/features/search/pages/search_view.dart';
 
+import '../../features/reviews/pages/reviews_view.dart';
+
 final router = GoRouter(
-  initialLocation: Routes.myCart,
+  initialLocation: Routes.login,
   routes: [
+    GoRoute(
+      path: Routes.splashScreen,
+      builder: (context, state) => StoreAppSplashScreen(),
+    ),
+    GoRoute(
+      path: Routes.onboarding,
+      builder: (context, state) => StoreAppOnboarding(),
+    ),
     GoRoute(
       path: Routes.login,
       builder: (context, state) => BlocProvider(
@@ -51,6 +65,15 @@ final router = GoRouter(
                 context.read(),
               ),
           child: ForgotPasswordView()),
+    ),
+    GoRoute(
+      path: Routes.reviews,
+      builder: (context, state) => BlocProvider(
+          create: (context) => ReviewsBloc(
+                productId: 2,
+                reviewsRepo: context.read(),
+              ),
+          child: ReviewsView()),
     ),
     GoRoute(
       path: Routes.verificationCode,
@@ -123,7 +146,10 @@ final router = GoRouter(
     ),
     GoRoute(
       path: Routes.detail,
-      builder: (context, state) => DetailsView(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => DetailsBloc(repo: context.read(), id: 2),
+        child: DetailsView(),
+      ),
     ),
     GoRoute(
       path: Routes.myCart,

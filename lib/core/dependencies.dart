@@ -37,5 +37,9 @@ final List<SingleChildWidget> providers = [
       client: context.read(),
     ),
   ),
-  Provider(create: (context) => DetailRepository(client: context.read()))
+  Provider(
+    create: (context) => DetailRepository(
+      client: context.read(),
+    ),
+  )
 ];
