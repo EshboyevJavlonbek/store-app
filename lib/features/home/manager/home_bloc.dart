@@ -1,32 +1,52 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store_app/data/repository/category_repository.dart';
+import 'package:store_app/data/repository/product/product_repository.dart';
 import 'package:store_app/data/repository/search_repository.dart';
 import 'package:store_app/features/home/manager/home_events.dart';
 import 'package:store_app/features/home/manager/home_state.dart';
 
-class HomeBloc extends Bloc<HomeEvents, HomeState> {
-  final CategoryRepository _repo;
-  final SearchRepository _searchRepo;
+import '../../../data/repository/category/category_repository.dart';
 
-  HomeBloc(
-      {required CategoryRepository repo, required SearchRepository searchRepo})
-      : _repo = repo,
+class HomeBloc extends Bloc<HomeEvents, HomeState> {
+  final ProductRepository _repo;
+  final SearchRepository _searchRepo;
+  final CategoryRepository _catRepo;
+
+  HomeBloc({
+    required ProductRepository repo,
+    required SearchRepository searchRepo,
+    required CategoryRepository catRepo,
+  })  : _catRepo = catRepo,
+        _repo = repo,
         _searchRepo = searchRepo,
         super(HomeState.initial()) {
     on<HomeLoad>(_onLoad);
     on<HomeSearch>(_searchLoad);
-    add(HomeLoad());
+    on<HomeSaved>(_homeSaved);
+    on<HomeUnSaved>(_homeUnSaved);
   }
 
   Future<void> _onLoad(HomeLoad event, Emitter<HomeState> emit) async {
-    emit(state.copyWidth(status: HomeStatus.loading));
-    final categories = await _repo.getCategories();
-    emit(state.copyWidth(categories: categories, status: HomeStatus.success));
+    emit(state.copyWith(status: HomeStatus.loading));
+    final products = await _repo.getProducts(productId: event.categoryId);
+    final categories = await _catRepo.getCategories();
+    emit(state.copyWith(
+      categories: categories,
+      products: products,
+      status: HomeStatus.success,
+    ));
   }
 
   Future<void> _searchLoad(HomeSearch event, Emitter<HomeState> emit) async {
-    emit(state.copyWidth(status: HomeStatus.loading));
+    emit(state.copyWith(status: HomeStatus.loading));
     final searchResult = await _searchRepo.getSearchResult(event.title);
-    emit(state.copyWidth(status: HomeStatus.success, categories: searchResult));
+    emit(state.copyWith(status: HomeStatus.success, products: searchResult));
+  }
+
+  Future<void> _homeUnSaved(HomeUnSaved event, Emitter<HomeState> emit) async {
+    await _repo.unSavedItem(productId: event.productId);
+  }
+
+  Future<void> _homeSaved(HomeSaved event, Emitter<HomeState> emit) async {
+    await _repo.savedItem(productId: event.productId);
   }
 }

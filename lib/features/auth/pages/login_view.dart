@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:store_app/core/check/login_check.dart';
 import 'package:store_app/features/auth/pages/store_text_button.dart';
 import 'package:store_app/features/auth/widgets/or_item.dart';
 import 'package:store_app/features/common/widgets/store_app_button_with_logo.dart';
@@ -27,13 +28,6 @@ class _LoginViewState extends State<LoginView> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +71,7 @@ class _LoginViewState extends State<LoginView> {
                           return "This field is required.";
                         }
                         final emailRegex =
-                            RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
+                            RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                         if (!emailRegex.hasMatch(value)) {
                           bloc.emailValid = false;
                           setState(() {});
@@ -132,7 +126,7 @@ class _LoginViewState extends State<LoginView> {
               StoreAppButton(
                 text: 'Login',
                 containerColor: bloc.getBackgroundColor(),
-                callback: () {
+                callback: () async{
                   if (formKey.currentState!.validate()) {
                     bloc.add(
                       LoginRequested(
@@ -140,9 +134,7 @@ class _LoginViewState extends State<LoginView> {
                         password: passwordController.text,
                       ),
                     );
-                    // if (state.status == LoginStatus.success) {
-                      context.go(Routes.notification);
-                    // }
+                    await LoginCheck.saveLoginStatus(true);
                   }
                 },
               ),
