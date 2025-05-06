@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store_app/data/repository/product_repository.dart';
+import 'package:store_app/data/repository/product/product_repository.dart';
 import 'package:store_app/data/repository/search_repository.dart';
 import 'package:store_app/features/home/manager/home_events.dart';
 import 'package:store_app/features/home/manager/home_state.dart';
@@ -26,19 +26,20 @@ class HomeBloc extends Bloc<HomeEvents, HomeState> {
   }
 
   Future<void> _onLoad(HomeLoad event, Emitter<HomeState> emit) async {
-    emit(state.copyWidth(status: HomeStatus.loading));
-    final products = await _repo.getProducts(categoryId: event.categoryId);
+    emit(state.copyWith(status: HomeStatus.loading));
+    final products = await _repo.getProducts(productId: event.categoryId);
     final categories = await _catRepo.getCategories();
-    emit(state.copyWidth(
-        categories: categories,
-        products: products,
-        status: HomeStatus.success));
+    emit(state.copyWith(
+      categories: categories,
+      products: products,
+      status: HomeStatus.success,
+    ));
   }
 
   Future<void> _searchLoad(HomeSearch event, Emitter<HomeState> emit) async {
-    emit(state.copyWidth(status: HomeStatus.loading));
+    emit(state.copyWith(status: HomeStatus.loading));
     final searchResult = await _searchRepo.getSearchResult(event.title);
-    emit(state.copyWidth(status: HomeStatus.success, products: searchResult));
+    emit(state.copyWith(status: HomeStatus.success, products: searchResult));
   }
 
   Future<void> _homeUnSaved(HomeUnSaved event, Emitter<HomeState> emit) async {
