@@ -7,10 +7,10 @@ part'notification_model.g.dart';
 abstract class NotificationModel with _$NotificationModel implements IJsonSerializable{
   const factory NotificationModel({
     required int id,
-    required String image,
+    required String icon,
     required String title,
-    required String subTitle,
-    required DateTime date,
+    required String content,
+    required String date,
   })=_NotificationModel;
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) =>_$NotificationModelFromJson(json);
