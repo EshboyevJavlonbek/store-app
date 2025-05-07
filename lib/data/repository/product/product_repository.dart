@@ -1,3 +1,5 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:http/http.dart' as http;
 import 'package:store_app/core/client.dart';
 import 'package:store_app/data/interfaces/product_repository_interface.dart';
 import 'package:store_app/data/model/product/product_model.dart';
@@ -20,9 +22,37 @@ class ProductRepository implements IProductRepository {
 
   @override
   Future<List<ProductModel>> getProducts({required int productId}) async {
-    final products = await localRepo.getProducts(productId: productId);
-    if (products.isNotEmpty) return products;
-    return await remoteRepo.getProducts(productId: productId);
+    final connectivity = await Connectivity().checkConnectivity();
+    bool hasInternet = connectivity != ConnectivityResult.none;
+
+    if (hasInternet) {
+      try {
+        final testResponse = await http
+            .get(Uri.parse('https://www.google.com'))
+            .timeout(const Duration(seconds: 5));
+
+        hasInternet = testResponse.statusCode == 200;
+      } catch (_) {
+        hasInternet = false;
+      }
+    }
+
+    if (hasInternet) {
+      try {
+        final remoteProducts =
+            await remoteRepo.getProducts(productId: productId);
+
+        await localRepo.saveProducts(remoteProducts);
+
+        return remoteProducts;
+      } catch (e) {
+        print('Xatolik: remoteRepo ishlamadi, localdan olinmoqda: $e');
+        return await localRepo.getProducts(productId: productId);
+      }
+    } else {
+      print('Internet yo‘q, localdan olinmoqda');
+      return await localRepo.getProducts(productId: productId);
+    }
   }
 
   Future<List<ProductModel>> getSavedItems() async {
