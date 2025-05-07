@@ -9,17 +9,17 @@ part of 'notification_model.dart';
 _NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
     _NotificationModel(
       id: (json['id'] as num).toInt(),
-      image: json['image'] as String,
+      icon: json['icon'] as String,
       title: json['title'] as String,
-      subTitle: json['subTitle'] as String,
-      date: DateTime.parse(json['date'] as String),
+      content: json['content'] as String,
+      date: json['date'] as String,
     );
 
 Map<String, dynamic> _$NotificationModelToJson(_NotificationModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'image': instance.image,
+      'icon': instance.icon,
       'title': instance.title,
-      'subTitle': instance.subTitle,
-      'date': instance.date.toIso8601String(),
+      'content': instance.content,
+      'date': instance.date,
     };

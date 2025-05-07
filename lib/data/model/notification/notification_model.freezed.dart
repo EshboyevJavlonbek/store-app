@@ -16,10 +16,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NotificationModel {
   int get id;
-  String get image;
+  String get icon;
   String get title;
-  String get subTitle;
-  DateTime get date;
+  String get content;
+  String get date;
 
   /// Create a copy of NotificationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -38,21 +38,19 @@ mixin _$NotificationModel {
         (other.runtimeType == runtimeType &&
             other is NotificationModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.image, image) || other.image == image) &&
+            (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.subTitle, subTitle) ||
-                other.subTitle == subTitle) &&
+            (identical(other.content, content) || other.content == content) &&
             (identical(other.date, date) || other.date == date));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, image, title, subTitle, date);
+  int get hashCode => Object.hash(runtimeType, id, icon, title, content, date);
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, image: $image, title: $title, subTitle: $subTitle, date: $date)';
+    return 'NotificationModel(id: $id, icon: $icon, title: $title, content: $content, date: $date)';
   }
 }
 
@@ -62,8 +60,7 @@ abstract mixin class $NotificationModelCopyWith<$Res> {
           NotificationModel value, $Res Function(NotificationModel) _then) =
       _$NotificationModelCopyWithImpl;
   @useResult
-  $Res call(
-      {int id, String image, String title, String subTitle, DateTime date});
+  $Res call({int id, String icon, String title, String content, String date});
 }
 
 /// @nodoc
@@ -80,9 +77,9 @@ class _$NotificationModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? image = null,
+    Object? icon = null,
     Object? title = null,
-    Object? subTitle = null,
+    Object? content = null,
     Object? date = null,
   }) {
     return _then(_self.copyWith(
@@ -90,22 +87,22 @@ class _$NotificationModelCopyWithImpl<$Res>
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      image: null == image
-          ? _self.image
-          : image // ignore: cast_nullable_to_non_nullable
+      icon: null == icon
+          ? _self.icon
+          : icon // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      subTitle: null == subTitle
-          ? _self.subTitle
-          : subTitle // ignore: cast_nullable_to_non_nullable
+      content: null == content
+          ? _self.content
+          : content // ignore: cast_nullable_to_non_nullable
               as String,
       date: null == date
           ? _self.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
     ));
   }
 }
@@ -115,9 +112,9 @@ class _$NotificationModelCopyWithImpl<$Res>
 class _NotificationModel implements NotificationModel {
   const _NotificationModel(
       {required this.id,
-      required this.image,
+      required this.icon,
       required this.title,
-      required this.subTitle,
+      required this.content,
       required this.date});
   factory _NotificationModel.fromJson(Map<String, dynamic> json) =>
       _$NotificationModelFromJson(json);
@@ -125,13 +122,13 @@ class _NotificationModel implements NotificationModel {
   @override
   final int id;
   @override
-  final String image;
+  final String icon;
   @override
   final String title;
   @override
-  final String subTitle;
+  final String content;
   @override
-  final DateTime date;
+  final String date;
 
   /// Create a copy of NotificationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -154,21 +151,19 @@ class _NotificationModel implements NotificationModel {
         (other.runtimeType == runtimeType &&
             other is _NotificationModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.image, image) || other.image == image) &&
+            (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.subTitle, subTitle) ||
-                other.subTitle == subTitle) &&
+            (identical(other.content, content) || other.content == content) &&
             (identical(other.date, date) || other.date == date));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, image, title, subTitle, date);
+  int get hashCode => Object.hash(runtimeType, id, icon, title, content, date);
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, image: $image, title: $title, subTitle: $subTitle, date: $date)';
+    return 'NotificationModel(id: $id, icon: $icon, title: $title, content: $content, date: $date)';
   }
 }
 
@@ -180,8 +175,7 @@ abstract mixin class _$NotificationModelCopyWith<$Res>
       __$NotificationModelCopyWithImpl;
   @override
   @useResult
-  $Res call(
-      {int id, String image, String title, String subTitle, DateTime date});
+  $Res call({int id, String icon, String title, String content, String date});
 }
 
 /// @nodoc
@@ -198,9 +192,9 @@ class __$NotificationModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? image = null,
+    Object? icon = null,
     Object? title = null,
-    Object? subTitle = null,
+    Object? content = null,
     Object? date = null,
   }) {
     return _then(_NotificationModel(
@@ -208,22 +202,22 @@ class __$NotificationModelCopyWithImpl<$Res>
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      image: null == image
-          ? _self.image
-          : image // ignore: cast_nullable_to_non_nullable
+      icon: null == icon
+          ? _self.icon
+          : icon // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      subTitle: null == subTitle
-          ? _self.subTitle
-          : subTitle // ignore: cast_nullable_to_non_nullable
+      content: null == content
+          ? _self.content
+          : content // ignore: cast_nullable_to_non_nullable
               as String,
       date: null == date
           ? _self.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
     ));
   }
 }
