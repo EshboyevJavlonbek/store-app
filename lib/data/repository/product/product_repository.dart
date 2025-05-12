@@ -50,11 +50,9 @@ class ProductRepository implements IProductRepository {
 
         return remoteProducts;
       } catch (e) {
-        print('Xatolik: remoteRepo ishlamadi, localdan olinmoqda: $e');
         return await localRepo.getProducts(productId: productId);
       }
     } else {
-      print('Internet yo‘q, localdan olinmoqda');
       return await localRepo.getProducts(productId: productId);
     }
   }

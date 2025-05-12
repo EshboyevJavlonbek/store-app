@@ -23,9 +23,11 @@ class HomeBloc extends Bloc<HomeEvents, HomeState> {
     on<HomeSearch>(_searchLoad);
     on<HomeSaved>(_homeSaved);
     on<HomeUnSaved>(_homeUnSaved);
+    on<ChangeCategory>(_changedCategory);
   }
 
   Future<void> _onLoad(HomeLoad event, Emitter<HomeState> emit) async {
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     emit(state.copyWith(status: HomeStatus.loading));
     final products = await _repo.getProducts(productId: event.categoryId);
     final categories = await _catRepo.getCategories();
@@ -33,8 +35,14 @@ class HomeBloc extends Bloc<HomeEvents, HomeState> {
     emit(state.copyWith(
       categories: categories,
       products: products,
-      status: HomeStatus.success,
+      status: HomeStatus.error,
     ));
+  }
+
+  Future<void> _changedCategory(ChangeCategory event, Emitter<HomeState> emit)async{
+    emit(state.copyWith(status: HomeStatus.loading));
+    final products = await _repo.getProducts(productId: event.categoryId);
+    emit(state.copyWith(selectedCategory: event.categoryId, products: products, status: HomeStatus.success));
   }
 
   Future<void> _searchLoad(HomeSearch event, Emitter<HomeState> emit) async {

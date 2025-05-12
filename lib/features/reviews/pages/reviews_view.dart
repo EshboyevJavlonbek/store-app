@@ -81,9 +81,9 @@ class _ReviewsViewState extends State<ReviewsView> {
         return 'Yangi → Eski';
       case SortType.oldestToNewest:
         return 'Eski → Yangi';
-      default:
-        return 'Saralash';
-    }
+
+
+      }
   }
 
   String _formatDate(DateTime date) {
