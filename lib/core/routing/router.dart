@@ -36,7 +36,6 @@ import 'package:store_app/features/search/pages/search_view.dart';
 
 final router = GoRouter(
   initialLocation: Routes.login,
-
   routes: [
     GoRoute(
       path: Routes.onboarding,

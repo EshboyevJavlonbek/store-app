@@ -166,7 +166,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                         title: widget.state[index].title,
                         callback: () {
                           context.read<HomeBloc>().add(
-                                HomeLoad(
+                                ChangeCategory(
                                   categoryId: widget.state[index].id,
                                 ),
                               );

@@ -5,6 +5,11 @@ final class HomeLoad extends HomeEvents{
   HomeLoad({required this.categoryId});
 }
 
+final class ChangeCategory extends HomeEvents{
+  final int categoryId;
+  ChangeCategory({required this.categoryId});
+}
+
 final class HomeSearch extends HomeEvents{
   final String title;
   HomeSearch({required this.title});

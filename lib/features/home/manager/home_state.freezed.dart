@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$HomeState {
   List<CategoryModel> get categories;
   List<ProductModel> get products;
+  int? get selectedCategory;
   HomeStatus get status;
 
   /// Create a copy of HomeState
@@ -34,6 +35,8 @@ mixin _$HomeState {
             const DeepCollectionEquality()
                 .equals(other.categories, categories) &&
             const DeepCollectionEquality().equals(other.products, products) &&
+            (identical(other.selectedCategory, selectedCategory) ||
+                other.selectedCategory == selectedCategory) &&
             (identical(other.status, status) || other.status == status));
   }
 
@@ -42,11 +45,12 @@ mixin _$HomeState {
       runtimeType,
       const DeepCollectionEquality().hash(categories),
       const DeepCollectionEquality().hash(products),
+      selectedCategory,
       status);
 
   @override
   String toString() {
-    return 'HomeState(categories: $categories, products: $products, status: $status)';
+    return 'HomeState(categories: $categories, products: $products, selectedCategory: $selectedCategory, status: $status)';
   }
 }
 
@@ -58,6 +62,7 @@ abstract mixin class $HomeStateCopyWith<$Res> {
   $Res call(
       {List<CategoryModel> categories,
       List<ProductModel> products,
+      int? selectedCategory,
       HomeStatus status});
 }
 
@@ -75,6 +80,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   $Res call({
     Object? categories = null,
     Object? products = null,
+    Object? selectedCategory = freezed,
     Object? status = null,
   }) {
     return _then(_self.copyWith(
@@ -86,6 +92,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _self.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
+      selectedCategory: freezed == selectedCategory
+          ? _self.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as int?,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -100,6 +110,7 @@ class _HomeState implements HomeState {
   const _HomeState(
       {required final List<CategoryModel> categories,
       required final List<ProductModel> products,
+      required this.selectedCategory,
       required this.status})
       : _categories = categories,
         _products = products;
@@ -121,6 +132,8 @@ class _HomeState implements HomeState {
   }
 
   @override
+  final int? selectedCategory;
+  @override
   final HomeStatus status;
 
   /// Create a copy of HomeState
@@ -139,6 +152,8 @@ class _HomeState implements HomeState {
             const DeepCollectionEquality()
                 .equals(other._categories, _categories) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
+            (identical(other.selectedCategory, selectedCategory) ||
+                other.selectedCategory == selectedCategory) &&
             (identical(other.status, status) || other.status == status));
   }
 
@@ -147,11 +162,12 @@ class _HomeState implements HomeState {
       runtimeType,
       const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(_products),
+      selectedCategory,
       status);
 
   @override
   String toString() {
-    return 'HomeState(categories: $categories, products: $products, status: $status)';
+    return 'HomeState(categories: $categories, products: $products, selectedCategory: $selectedCategory, status: $status)';
   }
 }
 
@@ -166,6 +182,7 @@ abstract mixin class _$HomeStateCopyWith<$Res>
   $Res call(
       {List<CategoryModel> categories,
       List<ProductModel> products,
+      int? selectedCategory,
       HomeStatus status});
 }
 
@@ -183,6 +200,7 @@ class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
   $Res call({
     Object? categories = null,
     Object? products = null,
+    Object? selectedCategory = freezed,
     Object? status = null,
   }) {
     return _then(_HomeState(
@@ -194,6 +212,10 @@ class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
           ? _self._products
           : products // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
+      selectedCategory: freezed == selectedCategory
+          ? _self.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as int?,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable

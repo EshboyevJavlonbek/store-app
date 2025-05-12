@@ -15,7 +15,8 @@ class StoreIconButtonContainer extends StatelessWidget {
     this.iconColor = AppColors.blackMain,
     required this.callback,
     this.borderRadius,
-    this.boxShadow
+    this.boxShadow,
+    this.border
   });
 
   final String image;
@@ -24,6 +25,7 @@ class StoreIconButtonContainer extends StatelessWidget {
   final VoidCallback callback;
   final BorderRadius? borderRadius;
   final List<BoxShadow>? boxShadow;
+  final BoxBorder? border;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,6 +35,7 @@ class StoreIconButtonContainer extends StatelessWidget {
         color: containerColor,
         borderRadius: borderRadius,
         boxShadow: boxShadow,
+        border: border,
       ),
       child: IconButton(
         padding: EdgeInsets.zero,

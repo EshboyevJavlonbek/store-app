@@ -8,7 +8,7 @@ import 'package:store_app/features/common/widgets/store_bottom_navigation_bar.da
 import 'package:store_app/features/common/widgets/store_icon_button_container.dart';
 import 'package:store_app/features/my_cart/manager/my_cart_bloc.dart';
 import 'package:store_app/features/my_cart/manager/my_cart_state.dart';
-import 'package:store_app/features/my_cart/pages/my_cart_item.dart';
+import 'package:store_app/features/my_cart/widgets/my_cart_item.dart';
 
 import '../../common/widgets/store_null_body.dart';
 
@@ -45,11 +45,16 @@ class MyCartView extends StatelessWidget {
                   title: "Your Cart Is Empty!",
                   subTitle: "When you add products, they’ll appear here.",
                 )
-              : ListView.builder(
-                  itemCount: state.cart!.items.length,
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  itemBuilder: (context, index) => MyCartItem(item: state.cart!.items[index],),
-                ),
+              : RefreshIndicator(
+                onRefresh: () async {
+                  context.read<MyCartBloc>().add(MyCartLoad());
+                },
+                child: ListView.builder(
+                    itemCount: state.cart!.items.length,
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    itemBuilder: (context, index) => MyCartItem(item: state.cart!.items[index],),
+                  ),
+              ),
           bottomNavigationBar: StoreBottomNavigationBar(),
         );
       },

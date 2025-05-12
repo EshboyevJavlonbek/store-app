@@ -133,7 +133,6 @@ class _LoginViewState extends State<LoginView> {
                         password: passwordController.text,
                       ),
                     );
-                    context.go(Routes.home);
                   }
                 },
               ),
