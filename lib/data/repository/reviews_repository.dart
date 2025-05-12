@@ -1,5 +1,5 @@
 import '../../core/client.dart';
-import '../model/reviews_model.dart';
+import '../model/reviews/reviews_model.dart';
 
 class ReviewRepository {
   final ApiClient client;

@@ -1,5 +1,5 @@
 import 'package:store_app/core/client.dart';
-import 'package:store_app/data/model/product_model.dart';
+import 'package:store_app/data/model/product/product_model.dart';
 
 class SearchRepository{
   SearchRepository({required this.client});

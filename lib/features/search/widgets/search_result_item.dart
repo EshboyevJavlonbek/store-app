@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:store_app/data/model/product/product_model.dart';
 import 'package:store_app/features/common/widgets/store_icon_button_container.dart';
 
 class SearchResultItem extends StatelessWidget {
   const SearchResultItem({
     super.key,
-    required this.image,
-    required this.title,
-    required this.price,
-    required this.id,
-    required this.discount,
+    required this.product,
   });
 
-  final String image, title;
-  final int price, id, discount;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +22,7 @@ class SearchResultItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                image,
+                product.image,
                 width: 56,
                 height: 54,
                 fit: BoxFit.cover,
@@ -37,7 +33,7 @@ class SearchResultItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  product.title,
                   style: TextStyle(
                     color: Color(0XFF1A1A1A),
                     fontWeight: FontWeight.w600,
@@ -45,16 +41,16 @@ class SearchResultItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "$price\$",
+                  "${product.price}\$",
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                     color: Color(0xff808080),
                   ),
                 ),
-                if (discount != 0)
+                if (product.discount != 0)
                   Text(
-                    "-$discount%",
+                    "-${product.discount}%",
                     style: TextStyle(
                       color: Color(0xFFED1010),
                       fontSize: 12.sp,

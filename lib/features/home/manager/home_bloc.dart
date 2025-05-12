@@ -29,6 +29,7 @@ class HomeBloc extends Bloc<HomeEvents, HomeState> {
     emit(state.copyWith(status: HomeStatus.loading));
     final products = await _repo.getProducts(productId: event.categoryId);
     final categories = await _catRepo.getCategories();
+    categories.sort((a, b) => a.id.compareTo(b.id));
     emit(state.copyWith(
       categories: categories,
       products: products,

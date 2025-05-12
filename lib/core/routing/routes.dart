@@ -10,7 +10,8 @@ class Routes {
   static const String checkout = '/checkout';
   static const String savedItems='/saved-items';
   static const String search = '/search';
-  static const String detail = '/detail:productId';
+  static const String detail = '/detail/:productId';
+  static const String reviews = '/reviews/:productId';
   static const String myCart ='/my-cart';
   static const String account = '/account';
   static const String orders = '/orders';
@@ -21,4 +22,5 @@ class Routes {
   static const String settings = '/settings';
 
   static getDetail(int productId) => '/detail/$productId';
+  static getReviews(int productId) => '/reviews/$productId';
 }

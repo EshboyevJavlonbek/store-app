@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store_app/data/repository/product_repository.dart';
+import 'package:store_app/data/repository/product/product_repository.dart';
 import 'package:store_app/features/saved_items/manager/saved_items_state.dart';
 
 part 'saved_items_events.dart';
