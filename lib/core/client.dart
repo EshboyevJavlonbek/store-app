@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:store_app/core/exceptions/auth_exception.dart';
 import 'package:store_app/core/interceptor.dart';
-import 'package:store_app/data/model/user_model.dart';
+import 'package:store_app/data/model/user/user_model.dart';
 
 class ApiClient {
   final Dio dio = Dio(
@@ -85,17 +85,29 @@ class ApiClient {
     }
   }
 
-  Future<bool> saveItem({required int productId}) async{
+  Future<bool> saveItem({required int productId}) async {
     var response = await dio.post('/auth/save/$productId');
     if (response.statusCode == 200) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
 
-  Future<bool> unSaveItem({required int productId}) async{
+  Future<bool> unSaveItem({required int productId}) async {
     var response = await dio.post('/auth/unsave/$productId');
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> addProduct({required int productId, required int sizeId}) async {
+    var response = await dio.post('/my-cart/add-item', data: {
+      "productId": productId,
+      "sizeId": sizeId,
+    });
     if (response.statusCode == 200) {
       return true;
     }else{

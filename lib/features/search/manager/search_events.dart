@@ -1,8 +1,11 @@
-part of'search_bloc.dart';
+part of 'search_bloc.dart';
 
-sealed class SearchEvents{}
+sealed class SearchEvents {}
 
-final class SearchRequest extends SearchEvents{
+final class SearchRequest extends SearchEvents {
   final String title;
+
   SearchRequest({required this.title});
 }
+
+final class SearchClear extends SearchEvents {}

@@ -6,7 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:store_app/core/dependencies.dart';
 import 'package:store_app/core/routing/router.dart';
 import 'package:store_app/core/utils/themes.dart';
+import 'package:store_app/data/model/category/category_model.dart';
 import 'package:store_app/data/model/category/category_model_adapter.dart';
+import 'package:store_app/data/model/product/product_model.dart';
+import 'package:store_app/data/model/product/product_model_adapter.dart';
 
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -15,7 +18,9 @@ void main() async{
   final cacheDir = await getApplicationCacheDirectory();
   Hive.init(cacheDir.path);
   Hive.registerAdapter(CategoryModelAdapter());
-  await Hive.openBox('categories');
+  Hive.registerAdapter(ProductModelAdapter());
+  await Hive.openBox<CategoryModel>('categories');
+  await Hive.openBox<ProductModel>('products');
   runApp(StoreApp());
 }
 

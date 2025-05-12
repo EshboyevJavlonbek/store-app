@@ -24,9 +24,9 @@ class StarRating extends StatelessWidget {
             width: size,
             height: size - 2,
             colorFilter:ColorFilter.mode(
-              index < rating ? Colors.yellow : const Color(0xffE6E6E6),
+              index < rating ? Colors.transparent : const Color(0xffE6E6E6),
               BlendMode.saturation,
-            )
+            ),
           ),
         );
       }),

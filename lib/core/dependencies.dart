@@ -4,7 +4,7 @@ import 'package:store_app/core/client.dart';
 import 'package:store_app/data/repository/auth_repository.dart';
 import 'package:store_app/data/repository/category/category_repository_local.dart';
 import 'package:store_app/data/repository/category/category_repository_remote.dart';
-import 'package:store_app/data/repository/detail_repository.dart';
+import 'package:store_app/data/repository/my_cart_repository.dart';
 import 'package:store_app/data/repository/product/product_repository.dart';
 import 'package:store_app/data/repository/notification_repository.dart';
 import 'package:store_app/data/repository/product/product_repository_local.dart';
@@ -56,7 +56,7 @@ final List<SingleChildWidget> providers = [
     ),
   ),
   Provider(
-    create: (context) => DetailRepository(
+    create: (context) => MyCartRepository(
       client: context.read(),
     ),
   ),

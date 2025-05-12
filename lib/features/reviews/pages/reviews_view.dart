@@ -28,7 +28,9 @@ class _ReviewsViewState extends State<ReviewsView> {
             ListTile(
               title: const Text('Past → Yuqori baho'),
               onTap: () {
-                context.read<ReviewsBloc>().add(SortReviews(SortType.lowestToHighest));
+                context
+                    .read<ReviewsBloc>()
+                    .add(SortReviews(SortType.lowestToHighest));
                 setState(() => _selectedSort = SortType.lowestToHighest);
                 Navigator.pop(context);
               },
@@ -36,7 +38,9 @@ class _ReviewsViewState extends State<ReviewsView> {
             ListTile(
               title: const Text('Yuqori → Past baho'),
               onTap: () {
-                context.read<ReviewsBloc>().add(SortReviews(SortType.highestToLowest));
+                context
+                    .read<ReviewsBloc>()
+                    .add(SortReviews(SortType.highestToLowest));
                 setState(() => _selectedSort = SortType.highestToLowest);
                 Navigator.pop(context);
               },
@@ -44,7 +48,9 @@ class _ReviewsViewState extends State<ReviewsView> {
             ListTile(
               title: const Text('Yangi → Eski'),
               onTap: () {
-                context.read<ReviewsBloc>().add(SortReviews(SortType.newestToOldest));
+                context
+                    .read<ReviewsBloc>()
+                    .add(SortReviews(SortType.newestToOldest));
                 setState(() => _selectedSort = SortType.newestToOldest);
                 Navigator.pop(context);
               },
@@ -52,7 +58,9 @@ class _ReviewsViewState extends State<ReviewsView> {
             ListTile(
               title: const Text('Eski → Yangi'),
               onTap: () {
-                context.read<ReviewsBloc>().add(SortReviews(SortType.oldestToNewest));
+                context
+                    .read<ReviewsBloc>()
+                    .add(SortReviews(SortType.oldestToNewest));
                 setState(() => _selectedSort = SortType.oldestToNewest);
                 Navigator.pop(context);
               },
@@ -92,7 +100,7 @@ class _ReviewsViewState extends State<ReviewsView> {
       appBar: StoreAppBar(
         title: "Reviews",
         actions: [SvgPicture.asset("assets/icons/notification.svg")],
-        bottom:  PreferredSize(
+        bottom: PreferredSize(
           preferredSize: Size.fromHeight(25),
           child: Divider(color: Color(0xffE6E6E6), thickness: 2),
         ),
@@ -102,11 +110,11 @@ class _ReviewsViewState extends State<ReviewsView> {
         child: BlocBuilder<ReviewsBloc, ReviewsState>(
           builder: (context, state) {
             if (state.status == ReviewsStatus.loading) {
-              return  Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator());
             }
 
             if (state.status == ReviewsStatus.error) {
-              return  Center(child: Text("Error loading reviews"));
+              return Center(child: Text("Error loading reviews"));
             }
 
             final reviews = state.reviews;
@@ -132,37 +140,37 @@ class _ReviewsViewState extends State<ReviewsView> {
                   children: [
                     Text(
                       averageRating.toStringAsFixed(1),
-                      style:  TextStyle(
+                      style: TextStyle(
                         fontSize: 64,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'General Sans',
                       ),
                     ),
-                     SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: List.generate(5, (index) {
                             return Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: 2),
+                              padding: EdgeInsets.symmetric(horizontal: 2),
                               child: SvgPicture.asset(
                                 "assets/icons/star_filled.svg",
                                 width: 24,
                                 colorFilter: ColorFilter.mode(
                                   index < averageRating.round()
                                       ? Colors.orange
-                                      :  Color(0xffE6E6E6),
+                                      : Color(0xffE6E6E6),
                                   BlendMode.srcIn,
                                 ),
                               ),
                             );
                           }),
                         ),
-                         SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Text(
                           "$totalRatings Ratings",
-                          style:  TextStyle(
+                          style: TextStyle(
                             color: Color(0xff808080),
                             fontSize: 16,
                             fontFamily: 'General Sans',
@@ -176,69 +184,74 @@ class _ReviewsViewState extends State<ReviewsView> {
                   ratingCounts: ratingCounts,
                   totalRatings: totalRatings,
                 ),
-                 Divider(color: Color(0xffE6E6E6), thickness: 2),
-                Row(
-                  children: [
-                    Text(
-                      "${reviews.length} Reviews",
-                      style:  TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'General Sans',
+                Divider(color: Color(0xffE6E6E6), thickness: 2),
+                GestureDetector(
+                  onTap: () => _showSortOptions(context),
+                  child: Row(
+                    children: [
+                      Text(
+                        "${reviews.length} Reviews",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'General Sans',
+                        ),
                       ),
-                    ),
-                     Spacer(),
-                    Text(
-                      _sortTypeText(_selectedSort),
-                      style:  TextStyle(
-                        color: Color(0xff808080),
-                        fontSize: 12,
-                        fontFamily: 'General Sans',
+                      Spacer(),
+                      Text(
+                        _sortTypeText(_selectedSort),
+                        style: TextStyle(
+                          color: Color(0xff808080),
+                          fontSize: 12,
+                          fontFamily: 'General Sans',
+                        ),
                       ),
-                    ),
-                     SizedBox(width: 5),
-                    GestureDetector(
-                      onTap: () => _showSortOptions(context),
-                      child: SvgPicture.asset("assets/icons/dropdown.svg"),
-                    )
-                  ],
+                      SizedBox(width: 5),
+                      SvgPicture.asset(
+                        "assets/icons/dropdown.svg",
+                        width: 10.78.w,
+                        height: 6.1.h,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
+                  ),
                 ),
-                 SizedBox(height: 10),
+                SizedBox(height: 10),
                 Expanded(
                   child: ListView.separated(
                     itemCount: reviews.length,
                     separatorBuilder: (_, __) =>
-                     Divider(color: Color(0xffE6E6E6)),
+                        Divider(color: Color(0xffE6E6E6)),
                     itemBuilder: (context, index) {
                       final review = reviews[index];
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           StarRating(rating: review.rating.toInt()),
-                           SizedBox(height: 4),
+                          SizedBox(height: 4),
                           Text(
                             review.comment,
-                            style:  TextStyle(
+                            style: TextStyle(
                               color: Color(0xff808080),
                               fontSize: 14,
                               fontFamily: 'General Sans',
                             ),
                           ),
-                           SizedBox(height: 6),
+                          SizedBox(height: 6),
                           Row(
                             children: [
                               Text(
                                 review.userFullName,
-                                style:  TextStyle(
+                                style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'General Sans',
                                 ),
                               ),
-                               SizedBox(width: 8),
+                              SizedBox(width: 8),
                               Text(
                                 "• ${_formatDate(review.created)}",
-                                style:  TextStyle(
+                                style: TextStyle(
                                   color: Color(0xff808080),
                                   fontSize: 14,
                                   fontFamily: 'General Sans',

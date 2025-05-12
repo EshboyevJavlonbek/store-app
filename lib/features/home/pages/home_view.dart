@@ -29,6 +29,7 @@ class _HomeViewState extends State<HomeView> {
         return Scaffold(
           appBar: HomeAppBar(
             state: state.categories,
+            selectedCategory: 1,
           ),
           extendBody: true,
           body: GridView.builder(
@@ -41,12 +42,7 @@ class _HomeViewState extends State<HomeView> {
             ),
             itemCount: state.products.length,
             itemBuilder: (context, index) => HomeProductItem(
-              image: state.products[index].image,
-              title: state.products[index].title,
-              price: state.products[index].price,
-              discount: state.products[index].discount,
-              id: state.products[index].id,
-              isLiked: state.products[index].isLiked,
+              model: state.products[index],
             ),
           ),
           bottomNavigationBar: StoreBottomNavigationBar(),

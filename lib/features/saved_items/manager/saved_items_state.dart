@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:store_app/data/model/product_model.dart';
+import 'package:store_app/data/model/product/product_model.dart';
 
 enum SavedItemsStatus { idle, loading, error, success }
 

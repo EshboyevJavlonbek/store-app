@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../data/model/reviews_model.dart';
+import '../../../data/model/reviews/reviews_model.dart';
 
 enum ReviewsStatus { initial, loading, success, error }
 

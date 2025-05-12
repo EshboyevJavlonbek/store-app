@@ -16,9 +16,11 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
   const HomeAppBar({
     super.key,
     required this.state,
+    required this.selectedCategory,
   });
 
   final List<CategoryModel> state;
+  final int selectedCategory;
 
   @override
   State<HomeAppBar> createState() => _HomeAppBarState();
@@ -32,7 +34,19 @@ class _HomeAppBarState extends State<HomeAppBar> {
   int selectedIndex = -1;
 
   @override
+  void initState() {
+    super.initState();
+    controller.addListener(_onSearchChanged);
+    selectedIndex = widget.selectedCategory;
+  }
+
+  void _onSearchChanged() {
+    context.read<HomeBloc>().add(HomeSearch(title: controller.text));
+  }
+
+  @override
   void dispose() {
+    controller.removeListener(_onSearchChanged);
     controller.dispose();
     super.dispose();
   }
@@ -80,7 +94,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     height: 52.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.grey.shade400, width: 1.2),
+                      border:
+                          Border.all(color: Colors.grey.shade400, width: 1.2),
                     ),
                     child: Row(
                       spacing: 8.w,
@@ -88,11 +103,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                         StoreIconButtonContainer(
                           iconColor: AppColors.greySub,
                           image: "assets/icons/search.svg",
-                          callback: () {
-                            context.read<HomeBloc>().add(
-                              HomeSearch(title: controller.text.trim()),
-                            );
-                          },
+                          callback: () {},
                         ),
                         Expanded(
                           child: TextField(
@@ -155,10 +166,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
                         title: widget.state[index].title,
                         callback: () {
                           context.read<HomeBloc>().add(
-                            HomeLoad(
-                              categoryId: widget.state[index].id,
-                            ),
-                          );
+                                HomeLoad(
+                                  categoryId: widget.state[index].id,
+                                ),
+                              );
                           setState(() {
                             selectedIndex = index;
                           });
@@ -182,4 +193,3 @@ class _HomeAppBarState extends State<HomeAppBar> {
     );
   }
 }
-

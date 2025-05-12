@@ -23,6 +23,21 @@ class _SearchViewState extends State<SearchView> {
   final TextEditingController searchController = TextEditingController();
 
   @override
+  void initState(){
+    searchController.addListener(_onSearchChanged);
+    super.initState();
+  }
+
+  void _onSearchChanged(){
+    final text = searchController.text;
+    if (text.isNotEmpty) {
+      context.read<SearchBloc>().add(SearchRequest(title: searchController.text));
+    }else{
+      context.read<SearchBloc>().add(SearchClear());
+    }
+  }
+
+  @override
   void dispose() {
     searchController.dispose();
     super.dispose();
@@ -55,12 +70,7 @@ class _SearchViewState extends State<SearchView> {
                     children: [
                       StoreIconButtonContainer(
                         image: "assets/icons/search.svg",
-                        callback: () {
-                          context.read<SearchBloc>().add(
-                                SearchRequest(
-                                    title: searchController.text.trim()),
-                              );
-                        },
+                        callback: () {},
                       ),
                       Expanded(
                         child: TextField(
@@ -89,7 +99,7 @@ class _SearchViewState extends State<SearchView> {
                 ),
               )),
           extendBody: true,
-          body: state.categories.isEmpty
+          body: state.products.isEmpty
               ? StoreNullBody(
                   image: "assets/icons/no_result.svg",
                   title: "No Results Found!",
@@ -102,13 +112,9 @@ class _SearchViewState extends State<SearchView> {
                       SizedBox(height: 20),
                       Expanded(
                         child: ListView.builder(
-                          itemCount: state.categories.length,
+                          itemCount: state.products.length,
                           itemBuilder: (context, index) => SearchResultItem(
-                            image: state.categories[index].image,
-                            title: state.categories[index].title,
-                            price: state.categories[index].price,
-                            id: state.categories[index].id,
-                            discount: state.categories[index].discount,
+                            product: state.products[index],
                           ),
                         ),
                       ),

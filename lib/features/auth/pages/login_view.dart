@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:store_app/core/check/login_check.dart';
 import 'package:store_app/features/auth/pages/store_text_button.dart';
 import 'package:store_app/features/auth/widgets/or_item.dart';
 import 'package:store_app/features/common/widgets/store_app_button_with_logo.dart';
@@ -134,7 +133,7 @@ class _LoginViewState extends State<LoginView> {
                         password: passwordController.text,
                       ),
                     );
-                    await LoginCheck.saveLoginStatus(true);
+                    context.go(Routes.home);
                   }
                 },
               ),

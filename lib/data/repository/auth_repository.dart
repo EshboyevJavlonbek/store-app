@@ -1,8 +1,6 @@
 import 'package:store_app/core/client.dart';
 import 'package:store_app/core/secure_storage.dart';
-import 'package:store_app/data/model/user_model.dart';
-
-import '../model/forgot_password_model.dart';
+import 'package:store_app/data/model/user/user_model.dart';
 
 class AuthRepository {
   AuthRepository({required this.client});
